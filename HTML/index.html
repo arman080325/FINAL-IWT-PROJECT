@@ -1,598 +1,186 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>TripBoss</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- font awesome cdn -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
-        integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <!-- fonts -->
-    <link rel="stylesheet" href="../font/fonts.css">
-    <!-- normalize css -->
-    <link rel="stylesheet" href="../css/normalize.css">
-    <!-- custom css -->
-    <link rel="stylesheet" href="../css/utility.css">
-    <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/responsive.css">
-    <link rel="stylesheet" href="../css/tools.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tripboss - Login</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
 
+        body {
+            background: url("../images/login.jpg") no-repeat center center;
+            background-size: cover;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
 
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3); /* Slight dim to keep text readable */
+            z-index: 0;
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            background: rgba(255, 255, 255, 0.584);
+            padding: 2rem 3rem;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+            width: 100%;
+            max-width: 380px;
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 1rem;
+            color: #0088cc;
+        }
+
+        .form-group {
+            margin-bottom: 1.2rem;
+            text-align: left;
+        }
+
+        label {
+            font-weight: 500;
+            font-size: 0.9rem;
+            color: #333;
+        }
+
+        input {
+            width: 100%;
+            padding: 0.7rem;
+            margin-top: 0.4rem;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            outline: none;
+            transition: 0.2s;
+        }
+
+        input:focus {
+            border-color: #0088cc;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 0.8rem;
+            border: none;
+            background: #00bfa6;
+            color: white;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .submit-btn:hover {
+            background: #008f7a;
+        }
+
+        .switch-text {
+            margin-top: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .switch-text a {
+            color: #0088cc;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .switch-text a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
-
 <body>
-    <!-- navbar  -->
-    <!-- navbar -->
-    <nav class="navbar">
-        <div class="container flex">
-            <a href="html/index.html" class="site-brand">
-                Trip<span class="logo-highlight">Boss</span>
-            </a>
-            <button type="button" id="navbar-show-btn" class="flex">
-                <i class="fas fa-bars"></i>
-            </button>
-            <div id="navbar-collapse">
-                <button type="button" id="navbar-close-btn" class="flex">
-                    <i class="fas fa-times"></i>
-                </button>
-                <ul class="navbar-nav">
-                    <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
-                    <li class="nav-item"><a href="gallery.html" class="nav-link">Gallery</a></li>
-                    <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
-                    <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
-                    <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
 
-                    <!-- Tools Dropdown -->
-                    <li class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle">
-                            Tools <span class="material-icons">arrow_drop_down</span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a href="../tools/html/cc.html">Currency Converter</a></li>
-                            <li><a href="../tools/html/lt.html">Language Translator</a></li>
-                            <li><a href="#">Coming Soon</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-    <!-- end of navbar  -->
-    <!-- Header -->
-    <header class="flex">
-        <!-- Video Background -->
-        <div class="video-background">
-            <iframe width="100%" height="1000"
-                src="https://www.youtube.com/embed/kcfs1-ryKWE?autoplay=1&mute=1&loop=1&playlist=kcfs1-ryKWE&controls=0&modestbranding=1&rel=0&iv_load_policy=3&vq=highres&start=2"
-                title="WEBSITE FPV" frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; fullscreen; picture-in-picture; web-share"
-                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
-            </iframe>
-            <div class="video-overlay"></div>
-        </div>
+    <div class="overlay"></div>
 
-        <div class="container">
-            <div class="header-title">
-                <h1 id="hero-main-title">
-                    Leave Your <span class="highlight">Footprints</span><br>
-                    Across the <span class="highlight">World</span>
-                </h1>
-                <p id="hero-subtitle">
-                    Discover 100+ breathtaking destinations, instantly compare real-time flight deals, and build your
-                    perfect itinerary — all in one powerful, easy-to-use platform. Whether you're chasing sunsets or
-                    city lights,<br><strong>TripBoss</strong> puts the entire world at your fingertips.
-                </p>
+    <div class="container" id="loginContainer">
+        <h1>Tripboss</h1>
+        <p style="color:#666;">Your travel companion</p>
+
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="loginEmail">Email</label>
+                <input type="email" id="loginEmail" placeholder="you@example.com" required>
             </div>
 
-            <!-- Destination search -->
-            <div class="header-form">
-                <h2>Choose your Travel location:</h2>
-                <form class="flex">
-                    <div class="glow-wrapper">
-                        <input type="text" id="searchbar" class="form-control" placeholder="Destination name">
-                    </div>
-                    <input type="submit" class="neon" value="Search">
-                </form>
-
-                <!-- Find Flights Button (placed directly below the search bar) -->
-                <button id="find-flights-btn" class="neon find-flights-btn">✈️ Find Flights</button>
+            <div class="form-group">
+                <label for="loginPassword">Password</label>
+                <input type="password" id="loginPassword" placeholder="••••••••" required>
             </div>
-        </div>
-    </header>
 
-    <!-- Popup Modal -->
-    <div id="flight-popup" class="popup">
-        <div class="popup-content">
-            <span class="popup-close" id="close-popup">&times;</span>
-            <h2>✈️ Flight Booking</h2>
-            <p>Coming Soon! Real-time flight prices and airport search will be added shortly.</p>
-            <img src="https://cdn-icons-png.flaticon.com/512/3062/3062634.png" width="120" alt="airplane">
-        </div>
+            <button type="submit" class="submit-btn">Login</button>
+        </form>
+
+        <p class="switch-text">
+            Don’t have an account? <a href="#" id="switchToRegister">Register</a>
+        </p>
     </div>
-    </header>
 
-    <!-- featured section -->
-    <section id="featured" class="py-4">
-        <div class="container">
-            <div class="title-wrap">
-                <span class="sm-title">know about some places before your travel</span>
-                <h2 class="lg-title">featured places</h2>
+    <div class="container" id="registerContainer" style="display:none;">
+        <h1>Tripboss</h1>
+        <p style="color:#666;">Create your account</p>
+
+        <form id="registerForm">
+            <div class="form-group">
+                <label for="registerName">Full Name</label>
+                <input type="text" id="registerName" placeholder="John Doe" required>
             </div>
 
-            <div class="featured-row">
-                <div class="featured-item my-2 shadow">
-                    <img src="../images/featured-reo-de-janeiro-brazil.jpg" alt="featured place">
-                    <div class="featured-item-content">
-                        <span>
-                            <i class="fas fa-map-marker-alt"></i>
-                            Rio De Janeiro, Brazil
-                        </span>
-                        <div>
-                            <p class="text">Rio de Janeiro, Brazil, is a vibrant city famed for beaches like
-                                Copacabana, Christ the Redeemer statue, Sugarloaf Mountain, and lively Carnival
-                                celebrations filled with samba, color, and culture.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="featured-item my-2 shadow">
-                    <img src="../images/featured-north-bondi-australia.jpg" alt="featured place">
-                    <div class="featured-item-content">
-                        <span>
-                            <i class="fas fa-map-marker-alt"></i>
-                            North Bondi, Australia
-                        </span>
-                        <div>
-                            <p class="text">North Bondi, Australia, is a scenic Sydney suburb known for its golden
-                                beach, surfing, ocean pools, and relaxed coastal vibe. It’s perfect for swimming,
-                                sunbathing, and stunning seaside views.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="featured-item my-2 shadow">
-                    <img src="../images/featured-berlin-germany.jpg" alt="featured place">
-                    <div class="featured-item-content">
-                        <span>
-                            <i class="fas fa-map-marker-alt"></i>
-                            Berlin, Germany
-                        </span>
-                        <div>
-                            <p class="text">Berlin, Germany’s capital, blends rich history with modern creativity.
-                                Famous for the Berlin Wall, Brandenburg Gate, and vibrant art scene, it’s a global hub
-                                of culture, innovation, and nightlife.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="featured-item my-2 shadow">
-                    <img src="../images/featured-khwaeng-wat-arun-thailand.jpg" alt="featured place">
-                    <div class="featured-item-content">
-                        <span>
-                            <i class="fas fa-map-marker-alt"></i>
-                            Khwaeng wat arun, Thailand
-                        </span>
-                        <div>
-                            <p class="text">Khwaeng Wat Arun, located in Bangkok, Thailand, is home to the famous Wat
-                                Arun (Temple of Dawn). Known for its stunning riverside views and intricate porcelain
-                                design, it’s a major cultural landmark.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="featured-item my-2 shadow">
-                    <img src="../images/eiffel-tower-paris.jpg" alt="featured place">
-                    <div class="featured-item-content">
-                        <span>
-                            <i class="fas fa-map-marker-alt"></i>
-                            Eiffel Tower, Paris
-                        </span>
-                        <div>
-                            <p class="text">The Eiffel Tower, built in 1889 in Paris by Gustave Eiffel, is a 330-meter
-                                iron landmark symbolizing France. It attracts millions yearly for its stunning views,
-                                architecture, and romantic charm.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="featured-item my-2 shadow">
-                    <img src="../images/featured-fuvahmulah-maldives.jpg" alt="featured place">
-                    <div class="featured-item-content">
-                        <span>
-                            <i class="fas fa-map-marker-alt"></i>
-                            fuvahmulah, maldives
-                        </span>
-                        <div>
-                            <p class="text">Fuvahmulah, Maldives, is a unique island known for its freshwater lakes,
-                                rich marine life, and scenic beauty. It’s famous for diving with tiger sharks and its
-                                lush, tropical environment.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="featured-item my-2 shadow">
-                    <img src="../images/pyramids-giza.jpg" alt="featured place">
-                    <div class="featured-item-content">
-                        <span>
-                            <i class="fas fa-map-marker-alt"></i>
-                            Great Pyramid of Giza: Giza, Egypt
-                        </span>
-                        <div>
-                            <p class="text">As the crown jewel of the Giza pyramid complex,the Great Pyramid of Giza is
-                                the last of the Seven Wonders of the Ancient World still standing with millions of
-                                visitors every year.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="featured-item my-2 shadow">
-                    <img src="../images/statue-of-liberty.jpg" alt="featured place">
-                    <div class="featured-item-content">
-                        <span>
-                            <i class="fas fa-map-marker-alt"></i>
-                            Statue of Liberty, New York
-                        </span>
-                        <div>
-                            <p class="text">Another French building has made it to second place: the Statue of Liberty.
-                                It was a gift from France to the USA and has stood in New York City Harbour since 1886.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="featured-item my-2 shadow">
-                    <img src="../images/great-wall-of-china.jpg" alt="featured place">
-                    <div class="featured-item-content">
-                        <span>
-                            <i class="fas fa-map-marker-alt"></i>
-                            Great Wall of China, Northeast of China
-                        </span>
-                        <div>
-                            <p class="text">In 4th place: the Great Wall of China, the longest wall in the world and a
-                                modern wonder of the world.However, the Great Wall of China is not a single continuous
-                                wall.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="featured-item my-2 shadow">
-                    <img src="../images/taj-mahal.jpg" alt="featured place">
-                    <div class="featured-item-content">
-                        <span>
-                            <i class="fas fa-map-marker-alt"></i>
-                            Taj Mahal, India
-                        </span>
-                        <div>
-                            <p class="text">The Taj Mahal in India is one of the 7 wonders of the world.
-                                The beautiful, huge structure was built almost 400 years ago as a mausoleum by a Great
-                                Mogul for his deceased wife</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="featured-item my-2 shadow">
-                    <img src="../images/colosseum.jpg" alt="featured place">
-                    <div class="featured-item-content">
-                        <span>
-                            <i class="fas fa-map-marker-alt"></i>
-                            Colosseum, Rome
-                        </span>
-                        <div>
-                            <p class="text">The Colosseum is the iconic landmark of Italy.<br>The Romans built the huge
-                                amphitheater almost 2,000 years ago.If you’re in Rome, you absolutely have to see it!
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="featured-item my-2 shadow">
-                    <img src="../images/grand-canyon-south-rim.jpg" alt="featured place">
-                    <div class="featured-item-content">
-                        <span>
-                            <i class="fas fa-map-marker-alt"></i>
-                            Grand Canyon, Arizona
-                        </span>
-                        <div>
-                            <p class="text">The Grand Canyon is a natural geological wonder located in Arizona, USA.The
-                                canyon is 277 miles long, up to 18 miles wide, and over a mile deep.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="featured-item my-2 shadow">
-                    <img src="../images/sydney-opera-house.jpg" alt="featured place">
-                    <div class="featured-item-content">
-                        <span>
-                            <i class="fas fa-map-marker-alt"></i>
-                            Sydney Opera House, Sydney
-                        </span>
-                        <div>
-                            <p class="text">The Sydney Opera House is one of the most famous and distinctive
-                                buildings in the world. Located in Sydney, Australia, it was designed by Danish
-                                architect Jørn Utzon and opened in 1973.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="featured-item my-2 shadow">
-                    <img src="../images/burj-khalifa-dubai.jpg" alt="featured place">
-                    <div class="featured-item-content">
-                        <span>
-                            <i class="fas fa-map-marker-alt"></i>
-                            Burj Khalifa,Dubai
-                        </span>
-                        <div>
-                            <p class="text">The Burj Khalifa in Dubai, UAE, is the world’s tallest building at 828
-                                meters. It symbolizes innovation, featuring stunning architecture, luxury spaces, and
-                                breathtaking city views.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="featured-item my-2 shadow">
-                    <img src="../images/golden-gate-bridge-san-francisco.jpg" alt="featured place">
-                    <div class="featured-item-content">
-                        <span>
-                            <i class="fas fa-map-marker-alt"></i>
-                            Golden Gate Bridge, San Francisco
-                        </span>
-                        <div>
-                            <p class="text">The Golden Gate Bridge is a suspension bridge spanning the Golden Gate, the
-                                strait that connects San Francisco Bay to the Pacific Ocean. It was completed in 1937.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="featured-item my-2 shadow">
-                    <img src="../images/vatican-city.jpg" alt="featured place">
-                    <div class="featured-item-content">
-                        <span>
-                            <i class="fas fa-map-marker-alt"></i>
-                            Vatican City, Italy
-                        </span>
-                        <div>
-                            <p class="text">Vatican City is an independent city-state enclaved within Rome, Italy. It is
-                                the spiritual and administrative center of the Roman Catholic Church and is the
-                                residence of the Pope.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="featured-item my-2 shadow">
-                    <img src="../images/leaning-tower-pisa.jpg" alt="featured place">
-                    <div class="featured-item-content">
-                        <span>
-                            <i class="fas fa-map-marker-alt"></i>
-                            Leaning Tower of Pisa, Italy
-                        </span>
-                        <div>
-                            <p class="text">The Leaning Tower of Pisa is a freestanding bell tower, known for its
-                                unintended tilt. It is located in Pisa, Italy, and is part of the cathedral of the
-                                Italian city.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="featured-item my-2 shadow">
-                    <img src="../images/sagrada-familia-passion-facade.jpg" alt="featured place">
-                    <div class="featured-item-content">
-                        <span>
-                            <i class="fas fa-map-marker-alt"></i>
-                            Sagrada Família, Barcelona
-                        </span>
-                        <div>
-                            <p class="text">The Sagrada Família is a large unfinished Roman Catholic basilica in
-                                Barcelona, designed by the architect Antoni Gaudí. Construction began in 1882 and is
-                                ongoing.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- end of featured section -->
-
-    <!-- services section -->
-    <section id="services" class="py-4">
-        <div class="container">
-            <div class="title-wrap">
-                <span class="sm-title">know about services that we offer</span>
-                <h2 class="lg-title">Our services</h2>
+            <div class="form-group">
+                <label for="registerEmail">Email</label>
+                <input type="email" id="registerEmail" placeholder="you@example.com" required>
             </div>
 
-            <div class="services-row">
-                <div class="services-item">
-                    <span class="services-icon">
-                        <i class="fas fa-hotel"></i>
-                    </span>
-                    <h3>Luxurious Hotel</h3>
-                    <p class="text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem quo, totam repellat
-                        velit, dignissimos sequi error a minima architecto fugit nisi dolorum repellendus?</p>
-                    <a href="#" class="btn">Read more</a>
-                </div>
-
-                <div class="services-item">
-                    <span class="services-icon">
-                        <i class="fas fa-map-marked-alt"></i>
-                    </span>
-                    <h3>Trave Guide</h3>
-                    <p class="text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem quo, totam repellat
-                        velit, dignissimos sequi error a minima architecto fugit nisi dolorum repellendus?</p>
-                    <a href="#" class="btn">Read more</a>
-                </div>
-
-                <div class="services-item">
-                    <span class="services-icon">
-                        <i class="fas fa-money-bill"></i>
-                    </span>
-                    <h3>Suitable Price</h3>
-                    <p class="text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem quo, totam repellat
-                        velit, dignissimos sequi error a minima architecto fugit nisi dolorum repellendus?</p>
-                    <a href="#" class="btn">Read more</a>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- end of services section -->
-
-    <!-- testimonials section -->
-    <section id="testimonials" class="py-4">
-        <div class="container">
-            <div class="title-wrap">
-                <span class="sm-title">what our clients say about us</span>
-                <h2 class="lg-title">testimonials</h2>
+            <div class="form-group">
+                <label for="registerPassword">Password</label>
+                <input type="password" id="registerPassword" placeholder="••••••••" required>
             </div>
 
-            <div class="test-row">
-                <div class="test-item">
-                    <p class="text">My trip to Brazil was absolutely unforgettable! The beaches were stunning, the
-                        culture so lively, and everything was perfectly arranged by TripBoss. The local guides made
-                        every moment special, and I never had to worry about anything. I’m already planning my next trip
-                        with them!</p>
-                    <div class="test-item-info">
-                        <img src="../images/test-1.jpg" alt="testimonial">
-                        <div>
-                            <h3>Kevin Wilson</h3>
-                            <p class="text">Trip to Brazil</p>
-                        </div>
-                    </div>
-                </div>
+            <button type="submit" class="submit-btn">Create Account</button>
+        </form>
 
-                <div class="test-item">
-                    <p class="text">The Maldives vacation was beyond my expectations. From the smooth booking process to
-                        the breathtaking resort views, everything was seamless. TripBoss took care of every detail, and
-                        the staff was incredibly helpful. I’ll definitely recommend this platform to anyone who loves
-                        stress-free travel!</p>
-                    <div class="test-item-info">
-                        <img src="../images/test-2.jpg" alt="testimonial">
-                        <div>
-                            <h3>Ben Davis</h3>
-                            <p class="text">Trip to Maldives</p>
-                        </div>
-                    </div>
-                </div>
+        <p class="switch-text">
+            Already have an account? <a href="#" id="switchToLogin">Login</a>
+        </p>
+    </div>
 
-                <div class="test-item">
-                    <p class="text">Thailand was pure magic! The food, people, and scenery were amazing, and TripBoss
-                        made it all effortless. Their itinerary balanced adventure and relaxation perfectly. Every
-                        destination felt handpicked just for us. I can’t wait to explore another country with TripBoss
-                        again soon!</p>
-                    <div class="test-item-info">
-                        <img src="../images/test-3.jpg" alt="testimonial">
-                        <div>
-                            <h3>Jaura Jones</h3>
-                            <p class="text">Trip to Thailand</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- end of testimonials section -->
-
-    <!-- video section -->
-    <section id="video">
-        <div class="video-wrapper flex">
-            <video loop>
-                <source src="../videos/video-section.mp4" type="video/mp4">
-            </video>
-            <button type="button" id="play-btn">
-                <i class="fas fa-play"></i>
-            </button>
-        </div>
-    </section>
-    <!-- end of video section -->
-
-
-
-    <!-- footer -->
-    <footer class="py-4">
-        <div class="container footer-row">
-            <div class="footer-item">
-                <a href="index.html" class="site-brand">
-                    Trip<span>Boss</span>
-                </a>
-                <p class="text">TripBoss is your smart travel companion that helps you discover amazing destinations,
-                    plan seamless trips, and enjoy hassle-free bookings. From breathtaking beaches to adventurous
-                    mountains, we bring the world closer to you with reliable recommendations, affordable deals, and
-                    trusted travel experiences — all in one place.</p>
-            </div>
-
-            <div class="footer-item">
-                <h2>Follow us on: </h2>
-                <ul class="social-links">
-                    <li>
-                        <a href="#">
-                            <i class="fab fa-facebook-f"></i>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class="fab fa-twitter"></i>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class="fab fa-pinterest"></i>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class="fab fa-google-plus"></i>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-
-            <div class="footer-item">
-                <h2>Popular Places:</h2>
-                <ul>
-                    <li><a href="https://www.tourismthailand.org/" target="_blank">Thailand</a></li>
-                    <li><a href="https://www.australia.com/en" target="_blank">Australia</a></li>
-                    <li><a href="https://visitmaldives.com/" target="_blank">Maldives</a></li>
-                    <li><a href="https://www.myswitzerland.com/en-us/" target="_blank">Switzerland</a></li>
-                    <li><a href="https://www.germany.travel/en/home.html" target="_blank">Germany</a></li>
-                    <li><a href="https://www.visitdubai.com/en" target="_blank">Dubai</a></li>
-                    <li><a href="https://www.indonesia.travel/gb/en/home" target="_blank">Indonesia</a></li>
-                    <li><a href="https://www.spain.info/en/" target="_blank">Spain</a></li>
-                    <li><a href="https://goturkiye.com/" target="_blank">Turkey</a></li>
-                    <li><a href="https://www.france.fr/en" target="_blank">France</a></li>
-                    <li><a href="https://www.japan.travel/en/" target="_blank">Japan</a></li>
-                    <li><a href="https://www.visitbritain.com/en" target="_blank">United Kingdom</a></li>
-                    <li><a href="https://www.visitgreece.gr/" target="_blank">Greece</a></li>
-                    <li><a href="https://www.italia.it/en" target="_blank">Italy</a></li>
-                </ul>
-            </div>
-
-            <div class="subscribe-form footer-item">
-                <h2>Subscribe for Newsletter!</h2>
-                <form class="flex">
-                    <input type="email" placeholder="Enter Email" class="form-control">
-                    <input type="submit" class="btn" value="Subscribe">
-                </form>
-            </div>
-        </div>
-    </footer>
-
-    <!-- end of footer -->
     <script>
-        // play/pause video
-        let video = document.querySelector('.video-wrapper video');
-        document.getElementById('play-btn').addEventListener('click', () => {
-            if (video.paused) {
-                video.play();
-            } else {
-                video.pause();
-            }
-        });
+        const loginContainer = document.getElementById('loginContainer');
+        const registerContainer = document.getElementById('registerContainer');
+        document.getElementById('switchToRegister').onclick = () => {
+            loginContainer.style.display = 'none';
+            registerContainer.style.display = 'block';
+        };
+        document.getElementById('switchToLogin').onclick = () => {
+            registerContainer.style.display = 'none';
+            loginContainer.style.display = 'block';
+        };
+        document.getElementById('loginForm').onsubmit = (e) => {
+            e.preventDefault();
+            window.location.href = "index.html";
+        };
+        document.getElementById('registerForm').onsubmit = (e) => {
+            e.preventDefault();
+            window.location.href = "index.html";
+        };
     </script>
 
 </body>
-
 </html>
