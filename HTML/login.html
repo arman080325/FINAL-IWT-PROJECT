@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>TripBoss | Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* ===== GLOBAL ===== */
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+
+            background: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1600&q=80') no-repeat center/cover;
+
+
+
+
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            position: relative;
+        }
+
+        /* Dark gradient overlay */
+        .overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.75));
+            z-index: 0;
+        }
+
+        /* Centered container */
+        .container {
+            width: 420px;
+
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+
+            padding: 35px 40px;
+            border-radius: 24px;
+            text-align: center;
+
+            color: white;
+            box-shadow: 0 0 30px rgba(0, 255, 157, 0.35);
+
+            z-index: 2;
+            animation: fadeUp 0.9s ease;
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Headers */
+        h2 {
+            margin-bottom: 10px;
+            font-size: 2.3rem;
+            font-weight: 700;
+            text-shadow: 0 2px 20px rgba(0, 0, 0, 0.7);
+        }
+
+        /* Small text */
+        .switch-text {
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+        }
+
+        .switch-text a {
+            color: #00ff9d;
+            font-weight: 600;
+        }
+
+        /* Input fields */
+        .input-box {
+            margin-top: 15px;
+        }
+
+        .input-box input,
+        .input-box select {
+            width: 100%;
+            padding: 14px;
+            border-radius: 14px;
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            font-size: 1rem;
+            outline: none;
+            transition: .3s ease;
+        }
+
+        .input-box input:focus,
+        .input-box select:focus {
+            border-color: #12ef67;
+            box-shadow: 0 0 15px rgba(18, 239, 103, 0.4);
+        }
+
+        ::placeholder {
+            color: #e8e8e8;
+        }
+
+        /* Button */
+        .btn {
+            width: 100%;
+            padding: 14px;
+            background: #12ef67;
+            border: none;
+            margin-top: 20px;
+
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #000;
+
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 30px rgba(18, 239, 103, 0.8);
+        }
+
+        /* Hidden signup container */
+        #signup-box {
+            display: none;
+        }
+
+        .back-home {
+            margin-top: 20px;
+            font-size: 1rem;
+        }
+
+        .back-home a {
+            color: #00ff9d;
+            font-weight: 600;
+        }
+
+        /* Fix dropdown list background */
+        select {
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+        }
+
+        select option {
+            background: rgba(20, 20, 20, 0.85);
+            color: #fff;
+            padding: 10px;
+        }
+
+        select option:hover {
+            background: rgba(0, 255, 157, 0.4);
+            color: #000;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="overlay"></div>
+
+    <div class="container">
+
+        <!-- LOGIN BOX -->
+        <div id="login-box">
+            <h2>Welcome Back</h2>
+            <p class="switch-text">Don't have an account? <a id="openSignup">Create one</a></p>
+
+            <div class="input-box">
+                <input type="email" placeholder="Email Address">
+            </div>
+
+            <div class="input-box">
+                <input type="password" placeholder="Password">
+            </div>
+
+            <button class="btn">Sign In</button>
+
+            <p class="back-home"><a href="home.html">⬅ Back to Home</a></p>
+        </div>
+
+        <!-- SIGNUP BOX -->
+        <div id="signup-box">
+            <h2>Create Account</h2>
+            <p class="switch-text">Already registered? <a id="openLogin">Sign In</a></p>
+
+            <div class="input-box">
+                <input type="text" placeholder="Full Name">
+            </div>
+
+            <div class="input-box">
+                <input type="email" placeholder="Email Address">
+            </div>
+
+            <div class="input-box" style="display:flex; gap:10px;">
+                <select style="
+      width: 35%;
+      padding: 14px;
+      border-radius: 14px;
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.35);
+      color: white;
+      font-size: 1rem;
+      outline:none;
+      backdrop-filter: blur(10px);
+    ">
+                    <option value="+91">🇮🇳 +91</option>
+                    <option value="+966">🇸🇦 +966</option>
+                    <option value="+971">🇦🇪 +971</option>
+                    <option value="+1">🇺🇸 +1</option>
+                    <option value="+44">🇬🇧 +44</option>
+                    <option value="+61">🇦🇺 +61</option>
+                    <option value="+49">🇩🇪 +49</option>
+                    <option value="+33">🇫🇷 +33</option>
+                </select>
+
+                <input type="tel" placeholder="Phone Number" style="width:65%; border-radius:14px; padding:14px; border:none;
+             background: rgba(255,255,255,0.15); border:1px solid rgba(255,255,255,0.35);
+             color:white; font-size:1rem; outline:none;">
+            </div>
+
+            <div class="input-box">
+                <input type="password" placeholder="Create Password">
+            </div>
+
+            <div class="input-box">
+                <input type="password" placeholder="Confirm Password">
+            </div>
+
+            <button class="btn">Sign Up</button>
+
+            <p class="back-home"><a href="home.html">⬅ Back to Home</a></p>
+        </div>
+
+    </div>
+
+    <!-- Script toggle -->
+    <script>
+        document.getElementById("openSignup").onclick = () => {
+            document.getElementById("login-box").style.display = "none";
+            document.getElementById("signup-box").style.display = "block";
+        };
+
+        document.getElementById("openLogin").onclick = () => {
+            document.getElementById("signup-box").style.display = "none";
+            document.getElementById("login-box").style.display = "block";
+        };
+    </script>
+
+</body>
+
+</html>

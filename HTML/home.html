@@ -61,6 +61,10 @@
                             <li><a href="#">Coming Soon</a></li>
                         </ul>
                     </li>
+                    <li class="nav-item">
+                        <a href="login.html" class="nav-login-btn">✈ Login</a>
+                    </li>
+
                 </ul>
             </div>
         </div>
@@ -100,13 +104,15 @@
                     <div class="glow-wrapper">
                         <input type="text" id="searchbar" class="form-control" placeholder="Destination name">
                     </div>
-                    <input type="submit" class="neon" value="Search">
+                    <input type="button" class="neon" value="Search">
                 </form>
 
-                <!-- Find Flights Button (placed directly below the search bar) -->
-                <button id="find-flights-btn" class="neon find-flights-btn">✈️ Find Flights</button>
+                <div class="flight-hotel-buttons">
+                    <button id="find-flights-btn" class="neon find-flights-btn">✈️ Find Flights</button>
+                    <button id="find-hotels-btn" class="neon find-hotels-btn">🏨 Find Hotels</button>
+                </div>
             </div>
-        </div>
+        </div>  
     </header>
 
     <!-- Popup Modal -->
@@ -118,7 +124,6 @@
             <img src="https://cdn-icons-png.flaticon.com/512/3062/3062634.png" width="120" alt="airplane">
         </div>
     </div>
-    </header>
 
     <!-- featured section -->
     <section id="featured" class="py-4">
@@ -602,6 +607,14 @@
             }
         });
     </script>
+    <script>
+        document.getElementById("find-hotels-btn").addEventListener("click", () => {
+            window.location.href = "../hotel/hotel.html";
+        });
+    </script>
+    <script src="../js/script.js"></script>
+
+
 
 </body>
 
