@@ -12,6 +12,7 @@
         integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- fonts -->
+    <link rel="stylesheet" href="../font/fonts.css">
     <!-- normalize css -->
     <link rel="stylesheet" href="../css/normalize.css">
     <!-- custom css -->
@@ -23,10 +24,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
-
+    <!-- Mapbox GL JS -->
+    <link href='https://api.mapbox.com/mapbox-gl-js/v3.0.0/mapbox-gl.css' rel='stylesheet' />
+    <script src='https://api.mapbox.com/mapbox-gl-js/v3.0.0/mapbox-gl.js'></script>
 </head>
-
 <body>
     <!-- navbar  -->
     <!-- navbar -->
@@ -57,7 +58,7 @@
                         <ul class="dropdown-menu">
                             <li><a href="../tools/html/cc.html">Currency Converter</a></li>
                             <li><a href="../tools/html/lt.html">Language Translator</a></li>
-                            <li><a href="#">Coming Soon</a></li>
+                            <li><a href="../tools/html/budget.html">Travel Budget Planner</a></li>
                         </ul>
                     </li>
                     <li class="nav-item">
@@ -107,8 +108,8 @@
                 </form>
 
                 <div class="flight-hotel-buttons">
-                    <button id="find-flights-btn" class="neon find-flights-btn">✈️ Find Flights</button>
-                    <button id="find-hotels-btn" class="neon find-hotels-btn">🏨 Find Hotels</button>
+                    <button id="find-flights-btn" class="fh-btn">✈️ Find Flights</button>
+                    <button id="find-hotels-btn" class="fh-btn">🏨 Find Hotels</button>
                 </div>
             </div>
         </div>  
@@ -519,6 +520,25 @@
     <!-- end of video section -->
 
 
+    <!-- Map Section -->
+    <!-- Map Section -->
+    <section id="map-section" class="py-4">
+        <div class="container">
+            <div class="title-wrap">
+                <span class="sm-title">explore the world on map</span>
+                <h2 class="lg-title">Must Visit Landmarks</h2>
+            </div>
+
+            <!-- Map controls toolbar -->
+            <div class="map-controls">
+                <div id="map-geocoder" style="min-width:260px; max-width:420px; flex:1;"></div>
+                <button id="btn-locate" class="btn" type="button">Locate me</button>
+            </div>
+
+            <!-- ONLY ONE MAP -->
+            <div id="map" style="height: 500px; border-radius: 12px;"></div>
+        </div>
+    </section>
 
     <!-- footer -->
     <footer class="py-4">
@@ -606,10 +626,13 @@
             }
         });
         document.getElementById("find-hotels-btn").addEventListener("click", () => {
-            window.location.href = "../hotel/hotel.html";
+            window.location.href = "hotel/hotel.html";
+        });
+        document.getElementById("find-flights-btn").addEventListener("click", () => {
+            window.location.href = "flight/flight.html";
         });
     </script>
-    <script src="../js/script.js"></script>
+    <script src="js/script.js"></script>
 
 
 
