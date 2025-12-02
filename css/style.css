@@ -2053,3 +2053,82 @@ header.header-sm{
 }
 /* Put Locate on its own line (optional) */
 #btn-locate{ flex-basis: 100%; align-self: center; text-align: center; }
+/* ==========================================
+   ✨ Premium Glassmorphic Travel Buttons
+   ========================================== */
+.flight-hotel-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 22px;
+  margin-top: 25px;
+  flex-wrap: wrap;
+}
+
+/* Glass Button Core */
+.fh-btn {
+  padding: 16px 38px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  border-radius: 45px;
+  border: 1.8px solid rgba(255, 255, 255, 0.35);
+  cursor: pointer;
+
+  /* ✨ Frosted Glass Background */
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+
+  color: #ffffff;
+  letter-spacing: 0.5px;
+  position: relative;
+  overflow: hidden;
+
+  /* Soft Glow & Depth */
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.3),
+    0 0 15px rgba(0, 255, 190, 0.2),
+    inset 0 0 20px rgba(255, 255, 255, 0.08);
+
+  transition: all 0.35s ease;
+}
+
+/* Shine sweep */
+.fh-btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -90%;
+  width: 60%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.45);
+  filter: blur(10px);
+  transform: skewX(-20deg);
+  transition: 0.7s ease;
+}
+
+/* Hover — Shine Sweep */
+.fh-btn:hover::before {
+  left: 160%;
+}
+
+/* Hover — Floating Glass & Glow */
+.fh-btn:hover {
+  transform: translateY(-5px) scale(1.06);
+  box-shadow:
+    0 12px 30px rgba(0, 255, 190, 0.35),
+    0 0 45px rgba(0, 255, 200, 0.4),
+    inset 0 0 25px rgba(255, 255, 255, 0.15);
+}
+
+/* Tap Effect */
+.fh-btn:active {
+  transform: translateY(0) scale(0.97);
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .fh-btn {
+    width: 90%;
+    text-align: center;
+  }
+}
