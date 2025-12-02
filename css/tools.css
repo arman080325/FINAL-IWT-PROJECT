@@ -1,0 +1,6 @@
+/* Placeholder tools.css
+   Created to avoid 404 / MIME errors while developing.
+   Add your tools-related CSS rules here if needed. */
+
+/* Example small rule so file is not empty */
+.tools-hidden { display: none; }
