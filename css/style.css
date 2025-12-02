@@ -1,5 +1,10 @@
 /* Import Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@900&family=Poppins:wght@400;600&display=swap');
+/* Import the font */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&display=swap');
+
+/* Import the font */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&display=swap');
 
 /* Hero Title Styling */
 #hero-main-title {
@@ -1312,8 +1317,6 @@ header.header-sm{
 }
 
 
-/* Import the font */
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&display=swap');
 
 /* Base logo */
 .site-brand {
