@@ -8,6 +8,21 @@
 
     <!-- Font -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- font awesome cdn -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+        integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- fonts -->
+    <!-- normalize css -->
+    <link rel="stylesheet" href="../css/normalize.css">
+    <!-- custom css -->
+    <link rel="stylesheet" href="../css/utility.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    <link rel="stylesheet" href="../css/tools.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
     <style>
         /* ===== GLOBAL ===== */
@@ -84,6 +99,7 @@
         .switch-text a {
             color: #00ff9d;
             font-weight: 600;
+            cursor: pointer;
         }
 
         /* Input fields */
@@ -171,16 +187,15 @@
     </style>
 </head>
 
-<body>
-
+<body class="login-page">
     <div class="overlay"></div>
 
     <div class="container">
 
         <!-- LOGIN BOX -->
-        <div id="login-box">
+        <form id="login-box">
             <h2>Welcome Back</h2>
-            <p class="switch-text">Don't have an account? <a id="openSignup">Create one</a></p>
+            <p class="switch-text">Don't have an account? <a href="signup.html" >Create one</a></p>
 
             <div class="input-box">
                 <input type="email" placeholder="Email Address">
@@ -192,76 +207,12 @@
 
             <button class="btn">Sign In</button>
 
-            <p class="back-home"><a href="home.html">⬅ Back to Home</a></p>
-        </div>
-
-        <!-- SIGNUP BOX -->
-        <div id="signup-box">
-            <h2>Create Account</h2>
-            <p class="switch-text">Already registered? <a id="openLogin">Sign In</a></p>
-
-            <div class="input-box">
-                <input type="text" placeholder="Full Name">
-            </div>
-
-            <div class="input-box">
-                <input type="email" placeholder="Email Address">
-            </div>
-
-            <div class="input-box" style="display:flex; gap:10px;">
-                <select style="
-      width: 35%;
-      padding: 14px;
-      border-radius: 14px;
-      background: rgba(255,255,255,0.15);
-      border: 1px solid rgba(255,255,255,0.35);
-      color: white;
-      font-size: 1rem;
-      outline:none;
-      backdrop-filter: blur(10px);
-    ">
-                    <option value="+91">🇮🇳 +91</option>
-                    <option value="+966">🇸🇦 +966</option>
-                    <option value="+971">🇦🇪 +971</option>
-                    <option value="+1">🇺🇸 +1</option>
-                    <option value="+44">🇬🇧 +44</option>
-                    <option value="+61">🇦🇺 +61</option>
-                    <option value="+49">🇩🇪 +49</option>
-                    <option value="+33">🇫🇷 +33</option>
-                </select>
-
-                <input type="tel" placeholder="Phone Number" style="width:65%; border-radius:14px; padding:14px; border:none;
-             background: rgba(255,255,255,0.15); border:1px solid rgba(255,255,255,0.35);
-             color:white; font-size:1rem; outline:none;">
-            </div>
-
-            <div class="input-box">
-                <input type="password" placeholder="Create Password">
-            </div>
-
-            <div class="input-box">
-                <input type="password" placeholder="Confirm Password">
-            </div>
-
-            <button class="btn">Sign Up</button>
-
-            <p class="back-home"><a href="home.html">⬅ Back to Home</a></p>
-        </div>
+            <p class="back-home"><a href="../index.html">⬅ Back to Home</a></p>
+        </form>
 
     </div>
 
-    <!-- Script toggle -->
-    <script>
-        document.getElementById("openSignup").onclick = () => {
-            document.getElementById("login-box").style.display = "none";
-            document.getElementById("signup-box").style.display = "block";
-        };
-
-        document.getElementById("openLogin").onclick = () => {
-            document.getElementById("signup-box").style.display = "none";
-            document.getElementById("login-box").style.display = "block";
-        };
-    </script>
+    <script src="../js/script.js"></script>
 
 </body>
 

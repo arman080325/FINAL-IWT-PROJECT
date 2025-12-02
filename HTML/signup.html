@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>TripBoss | Sign Up</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- font awesome cdn -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- normalize css -->
+    <link rel="stylesheet" href="../css/normalize.css">
+    <!-- custom css -->
+    <link rel="stylesheet" href="../css/utility.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    <link rel="stylesheet" href="../css/tools.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&display=swap" rel="stylesheet">
+
+    <style>
+        /* Reuse same styles as login page for consistent look */
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1600&q=80') no-repeat center/cover;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.75));
+            z-index: 0;
+        }
+
+        .container {
+            width: 420px;
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            padding: 35px 40px;
+            border-radius: 24px;
+            text-align: center;
+            color: white;
+            box-shadow: 0 0 30px rgba(0, 255, 157, 0.35);
+            z-index: 2;
+            animation: fadeUp 0.9s ease;
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h2 {
+            margin-bottom: 10px;
+            font-size: 2.3rem;
+            font-weight: 700;
+            text-shadow: 0 2px 20px rgba(0, 0, 0, 0.7);
+        }
+
+        .switch-text {
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+        }
+
+        .switch-text a {
+            color: #00ff9d;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .input-box {
+            margin-top: 15px;
+        }
+
+        /* Password criteria box */
+        .pwd-criteria {
+            text-align: left;
+            margin-top: 10px;
+            background: rgba(0,0,0,0.18);
+            padding: 12px;
+            border-radius: 12px;
+            font-size: 0.92rem;
+            color: #e6e6e6;
+        }
+
+        .pwd-criteria ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .pwd-criteria li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 6px 0;
+            opacity: 0.75;
+        }
+
+        .pwd-criteria li.valid {
+            color: #12ef67;
+            opacity: 1;
+        }
+
+        .pwd-criteria li .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #ff7675;
+        }
+
+        .pwd-criteria li.valid .dot {
+            background: #12ef67;
+        }
+
+        .input-box input,
+        .input-box select {
+            width: 100%;
+            padding: 14px;
+            border-radius: 14px;
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            font-size: 1rem;
+            outline: none;
+            transition: .3s ease;
+        }
+
+        .input-box input:focus,
+        .input-box select:focus {
+            border-color: #12ef67;
+            box-shadow: 0 0 15px rgba(18, 239, 103, 0.4);
+        }
+
+        ::placeholder {
+            color: #e8e8e8;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 14px;
+            background: #12ef67;
+            border: none;
+            margin-top: 20px;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #000;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 30px rgba(18, 239, 103, 0.8);
+        }
+
+        .back-home {
+            margin-top: 20px;
+            font-size: 1rem;
+        }
+
+        .back-home a {
+            color: #00ff9d;
+            font-weight: 600;
+        }
+
+    </style>
+</head>
+
+<body class="signup-page">
+    <div class="overlay"></div>
+
+    <div class="container">
+
+        <div id="signup-box">
+            <h2>Create Account</h2>
+            <p class="switch-text">Already have an account? <a href="login.html">Login</a></p>
+
+            <form id="signup-form" novalidate>
+                <div class="input-box">
+                    <input id="email" name="email" type="email" placeholder="Email Address" required>
+                </div>
+
+                <div class="input-box">
+                    <input id="mobile" name="mobile" type="tel" placeholder="Mobile Number" pattern="[0-9+ ]{6,}" required>
+                </div>
+
+                <div class="input-box">
+                    <input id="password" name="password" type="password" placeholder="Password" required>
+                </div>
+
+                <div class="pwd-criteria" id="pwd-criteria">
+                    <strong style="display:block; margin-bottom:8px;">Password must contain:</strong>
+                    <ul>
+                        <li id="c-length"><span class="dot"></span>At least 8 characters</li>
+                        <li id="c-lower"><span class="dot"></span>Lowercase letter (a-z)</li>
+                        <li id="c-upper"><span class="dot"></span>Uppercase letter (A-Z)</li>
+                        <li id="c-number"><span class="dot"></span>Number (0-9)</li>
+                        <li id="c-special"><span class="dot"></span>Special character (e.g. !@#$%)</li>
+                    </ul>
+                </div>
+
+                <div class="input-box">
+                    <input id="confirm_password" name="confirm_password" type="password" placeholder="Retype Password" required>
+                </div>
+
+                <div id="msg" class="msg" aria-live="polite" style="margin-top:12px; font-weight:600;"></div>
+
+                <button id="signup-btn" class="btn" type="submit" disabled>Sign Up</button>
+            </form>
+
+            <p class="back-home"><a href="../index.html">⬅ Back to Home</a></p>
+        </div>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const form = document.getElementById('signup-form');
+            const pwd = document.getElementById('password');
+            const cpwd = document.getElementById('confirm_password');
+            const msg = document.getElementById('msg');
+            const signupBtn = document.getElementById('signup-btn');
+
+            const checks = {
+                length: document.getElementById('c-length'),
+                lower: document.getElementById('c-lower'),
+                upper: document.getElementById('c-upper'),
+                number: document.getElementById('c-number'),
+                special: document.getElementById('c-special')
+            };
+
+            function validatePasswordCriteria(value) {
+                return {
+                    length: value.length >= 8,
+                    lower: /[a-z]/.test(value),
+                    upper: /[A-Z]/.test(value),
+                    number: /[0-9]/.test(value),
+                    special: /[!@#$%^&*(),.?":{}|<>\[\]\\/\\~`_+=;:-]/.test(value)
+                };
+            }
+
+            function updateCriteriaUI(results) {
+                for (const key in results) {
+                    const el = checks[key];
+                    if (!el) continue;
+                    if (results[key]) {
+                        el.classList.add('valid');
+                    } else {
+                        el.classList.remove('valid');
+                    }
+                }
+            }
+
+            function allCriteriaMet(results) {
+                return Object.values(results).every(v => v === true);
+            }
+
+            function updateSignupState() {
+                const results = validatePasswordCriteria(pwd.value);
+                const match = pwd.value && pwd.value === cpwd.value;
+                updateCriteriaUI(results);
+
+                if (allCriteriaMet(results) && match) {
+                    signupBtn.disabled = false;
+                } else {
+                    signupBtn.disabled = true;
+                }
+            }
+
+            pwd.addEventListener('input', function () {
+                const results = validatePasswordCriteria(pwd.value);
+                updateCriteriaUI(results);
+                updateSignupState();
+            });
+
+            cpwd.addEventListener('input', function () {
+                updateSignupState();
+            });
+
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+
+                if (!form.checkValidity()) {
+                    msg.style.color = '#ff7675';
+                    msg.style.background = 'transparent';
+                    msg.textContent = 'Please fill all fields correctly.';
+                    return;
+                }
+
+                const results = validatePasswordCriteria(pwd.value);
+                if (!allCriteriaMet(results)) {
+                    msg.style.color = '#ff7675';
+                    msg.style.background = 'transparent';
+                    msg.textContent = 'Password does not meet the criteria.';
+                    pwd.focus();
+                    return;
+                }
+
+                if (pwd.value !== cpwd.value) {
+                    msg.style.color = '#ff7675';
+                    msg.style.background = 'transparent';
+                    msg.textContent = 'Passwords do not match.';
+                    cpwd.focus();
+                    return;
+                }
+
+                // Success (demo)
+                msg.style.color = '#001f0f';
+                msg.style.background = 'rgba(18,239,103,0.95)';
+                msg.style.padding = '10px';
+                msg.style.borderRadius = '8px';
+                msg.textContent = 'Success — account created (demo).';
+
+                setTimeout(() => {
+                    form.reset();
+                    msg.textContent = '';
+                    msg.style.background = 'transparent';
+                    updateCriteriaUI({length:false, lower:false, upper:false, number:false, special:false});
+                    signupBtn.disabled = true;
+                }, 1400);
+            });
+        });
+    </script>
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>
