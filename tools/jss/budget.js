@@ -296,24 +296,126 @@ function setCurrentTrip() {
   alert(`✈️ Trip set: ${name} - ${destination}`);
 }
 
-function exportData() {
-  const dataStr = JSON.stringify({
-    trip: currentTrip,
-    budget: tripBudget,
-    transactions,
-    summary: {
-      totalIncome: transactions.filter(t => t.type === 'income').reduce((sum, t) => sum + t.amount, 0),
-      totalExpense: transactions.filter(t => t.type === 'expense').reduce((sum, t) => sum + t.amount, 0)
-    },
-    exportDate: new Date().toISOString()
-  }, null, 2);
+async function exportData() {
+  const jsPDF = window.jspdf.jsPDF;
+  const pdf = new jsPDF('p', 'mm', 'a4');
+  const pageWidth = pdf.internal.pageSize.getWidth();
+  const pageHeight = pdf.internal.pageSize.getHeight();
+  const margin = 15;
+  let yPosition = margin;
 
-  const dataBlob = new Blob([dataStr], { type: 'application/json' });
-  const url = URL.createObjectURL(dataBlob);
-  const link = document.createElement('a');
-  link.href = url;
-  link.download = `TravelBudget_${currentTrip.destination}_${new Date().toISOString().split('T')[0]}.json`;
-  link.click();
+  // Title
+  pdf.setFontSize(24);
+  pdf.setTextColor(20, 184, 166);
+  pdf.text("Travel Budget Report", pageWidth / 2, yPosition, { align: "center" });
+  yPosition += 10;
+
+  pdf.setFontSize(16);
+  pdf.setTextColor(50, 50, 50);
+  pdf.text(`${currentTrip.name}`, pageWidth / 2, yPosition, { align: "center" });
+  yPosition += 8;
+  pdf.text(`${currentTrip.destination}`, pageWidth / 2, yPosition, { align: "center" });
+  yPosition += 15;
+
+  // Summary Stats
+  pdf.setFontSize(12);
+  pdf.setTextColor(80, 80, 80);
+
+  const totalIncome = transactions.filter(t => t.type === 'income').reduce((s, t) => s + t.amount, 0);
+  const totalExpense = transactions.filter(t => t.type === 'expense').reduce((s, t) => s + t.amount, 0);
+  const balance = totalIncome - totalExpense;
+
+  const stats = [
+    { label: "Total Income", value: formatCurrency(totalIncome), color: "#27ae60" },
+    { label: "Total Spent", value: formatCurrency(totalExpense), color: "#e74c3c" },
+    { label: "Remaining Budget", value: formatCurrency(balance), color: balance >= 0 ? "#27ae60" : "#e74c3c" },
+    { label: "Transactions", value: transactions.length + " entries", color: "#3498db" }
+  ];
+
+  pdf.setFontSize(14);
+  stats.forEach(stat => {
+    pdf.setTextColor(100, 100, 100);
+    pdf.text(stat.label + ":", margin, yPosition);
+    pdf.setTextColor(...hexToRgb(stat.color));
+    pdf.setFont("helvetica", "bold");
+    pdf.text(stat.value, pageWidth - margin, yPosition, { align: "right" });
+    pdf.setFont("helvetica", "normal");
+    yPosition += 10;
+  });
+
+  yPosition += 10;
+
+  // Add Chart as Image
+  try {
+    const chartCanvas = document.getElementById('travelChart');
+    const chartImg = await html2canvas(chartCanvas, { scale: 2 });
+    const chartDataUrl = chartImg.toDataURL('image/png');
+
+    const imgWidth = pageWidth - 2 * margin;
+    const imgHeight = (chartImg.height * imgWidth) / chartImg.width;
+
+    if (yPosition + imgHeight > pageHeight - 30) {
+      pdf.addPage();
+      yPosition = margin;
+    }
+
+    pdf.addImage(chartDataUrl, 'PNG', margin, yPosition, imgWidth, imgHeight);
+    yPosition += imgHeight + 15;
+  } catch (err) {
+    console.warn("Chart capture failed, skipping chart");
+  }
+
+  // Transactions Table
+  if (transactions.length > 0) {
+    pdf.setFontSize(16);
+    pdf.setTextColor(20, 184, 166);
+    pdf.text("Transaction History", margin, yPosition);
+    yPosition += 10;
+
+    pdf.setFontSize(10);
+    pdf.setTextColor(60, 60, 60);
+
+    const tableData = transactions.map(t => [
+      new Date(t.date).toLocaleDateString(),
+      t.title,
+      t.category.replace(/\b\w/g, l => l.toUpperCase()),
+      t.type === 'income' ? '+ ' + formatCurrency(t.amount) : '- ' + formatCurrency(t.amount)
+    ]);
+
+    pdf.autoTable({
+      head: [['Date', 'Description', 'Category', 'Amount']],
+      body: tableData,
+      startY: yPosition,
+      theme: 'grid',
+      styles: { fontSize: 9, cellPadding: 3 },
+      headStyles: { fillColor: [20, 184, 166], textColor: 255 },
+      alternateRowStyles: { fillColor: [245, 247, 250] },
+      margin: { left: margin, right: margin }
+    });
+
+    yPosition = pdf.lastAutoTable.finalY + 15;
+  }
+
+  // Footer
+  pdf.setFontSize(10);
+  pdf.setTextColor(150, 150, 150);
+  pdf.text(`Generated on ${new Date().toLocaleString()} • Powered by TripBoss`, pageWidth / 2, pageHeight - 10, { align: "center" });
+
+  // Download
+  const fileName = `Travel_Budget_${currentTrip.name.replace(/[^a-z0-9]/gi, '_')}_${new Date().toISOString().slice(0,10)}.pdf`;
+  pdf.save(fileName);
+
+  alert("PDF Exported Successfully! Check your downloads folder.");
+}
+
+// Helper to convert hex color to RGB
+function hexToRgb(hex) {
+  const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+  return result ? [
+    parseInt(result[1], 16),
+    parseInt(result[2], 16),
+    parseInt(result[3], 16)
+  ] : [0, 0, 0];
 }
 
 function resetData() {
