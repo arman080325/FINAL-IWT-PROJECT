@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="FINAL-IWT-PROJECT:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/FINAL_IWT_PROJECT_war_exploded</output-path>
+    <root id="root">
+      <element id="dir-copy" path="$PROJECT_DIR$/src/main/webapp" />
+      <element id="javaee-facet-resources" facet="FINAL-IWT-PROJECT/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="FINAL-IWT-PROJECT" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>
