@@ -193,9 +193,9 @@
     <div class="container">
 
         <!-- LOGIN BOX -->
-        <div id="login-box">
+        <form id="login-box">
             <h2>Welcome Back</h2>
-            <p class="switch-text">Don't have an account? <a id="openSignup">Create one</a></p>
+            <p class="switch-text">Don't have an account? <a href="signup.html" >Create one</a></p>
 
             <div class="input-box">
                 <input type="email" placeholder="Email Address">
@@ -208,75 +208,9 @@
             <button class="btn">Sign In</button>
 
             <p class="back-home"><a href="../index.html">⬅ Back to Home</a></p>
-        </div>
-
-        <!-- SIGNUP BOX -->
-        <div id="signup-box">
-            <h2>Create Account</h2>
-            <p class="switch-text">Already registered? <a id="openLogin">Sign In</a></p>
-
-            <div class="input-box">
-                <input type="text" placeholder="Full Name">
-            </div>
-
-            <div class="input-box">
-                <input type="email" placeholder="Email Address">
-            </div>
-
-            <div class="input-box" style="display:flex; gap:10px;">
-                <select style="
-      width: 35%;
-      padding: 14px;
-      border-radius: 14px;
-      background: rgba(255,255,255,0.15);
-      border: 1px solid rgba(255,255,255,0.35);
-      color: white;
-      font-size: 1rem;
-      outline:none;
-      backdrop-filter: blur(10px);
-    ">
-                    <option value="+91">🇮🇳 +91</option>
-                    <option value="+966">🇸🇦 +966</option>
-                    <option value="+971">🇦🇪 +971</option>
-                    <option value="+1">🇺🇸 +1</option>
-                    <option value="+44">🇬🇧 +44</option>
-                    <option value="+61">🇦🇺 +61</option>
-                    <option value="+49">🇩🇪 +49</option>
-                    <option value="+33">🇫🇷 +33</option>
-                </select>
-
-                <input type="tel" placeholder="Phone Number" style="width:65%; border-radius:14px; padding:14px; border:none;
-             background: rgba(255,255,255,0.15); border:1px solid rgba(255,255,255,0.35);
-             color:white; font-size:1rem; outline:none;">
-            </div>
-
-            <div class="input-box">
-                <input type="password" placeholder="Create Password">
-            </div>
-
-            <div class="input-box">
-                <input type="password" placeholder="Confirm Password">
-            </div>
-
-            <button class="btn">Sign Up</button>
-
-            <p class="back-home"><a href="../index.html">⬅ Back to Home</a></p>
-        </div>
+        </form>
 
     </div>
-
-    <!-- Script toggle -->
-    <script>
-        document.getElementById("openSignup").onclick = () => {
-            document.getElementById("login-box").style.display = "none";
-            document.getElementById("signup-box").style.display = "block";
-        };
-
-        document.getElementById("openLogin").onclick = () => {
-            document.getElementById("signup-box").style.display = "none";
-            document.getElementById("login-box").style.display = "block";
-        };
-    </script>
 
     <script src="../js/script.js"></script>
 
