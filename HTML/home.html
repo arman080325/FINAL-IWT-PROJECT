@@ -24,6 +24,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Mapbox GL JS -->
+    <link href='https://api.mapbox.com/mapbox-gl-js/v3.0.0/mapbox-gl.css' rel='stylesheet' />
+    <script src='https://api.mapbox.com/mapbox-gl-js/v3.0.0/mapbox-gl.js'></script>
 
 
 </head>
@@ -58,13 +61,12 @@
                         <ul class="dropdown-menu">
                             <li><a href="../tools/html/cc.html">Currency Converter</a></li>
                             <li><a href="../tools/html/lt.html">Language Translator</a></li>
-                            <li><a href="#">Coming Soon</a></li>
+                            <li><a href="../tools/html/budget.html">Travel Budget Planner</a></li>
                         </ul>
                     </li>
                     <li class="nav-item">
                         <a href="login.html" class="nav-login-btn">✈ Login</a>
                     </li>
-
                 </ul>
             </div>
         </div>
@@ -112,7 +114,7 @@
                     <button id="find-hotels-btn" class="neon find-hotels-btn">🏨 Find Hotels</button>
                 </div>
             </div>
-        </div>  
+        </div>
     </header>
 
     <!-- Popup Modal -->
@@ -399,6 +401,8 @@
     </section>
     <!-- end of featured section -->
 
+
+
     <!-- services section -->
     <section id="services" class="py-4">
         <div class="container">
@@ -519,6 +523,25 @@
     </section>
     <!-- end of video section -->
 
+    <!-- Map Section -->
+    <!-- Map Section -->
+    <section id="map-section" class="py-4">
+        <div class="container">
+            <div class="title-wrap">
+                <span class="sm-title">explore the world on map</span>
+                <h2 class="lg-title">Must Visit Landmarks</h2>
+            </div>
+
+            <!-- Map controls toolbar -->
+            <div class="map-controls">
+                <div id="map-geocoder" style="min-width:260px; max-width:420px; flex:1;"></div>
+                <button id="btn-locate" class="btn" type="button">Locate me</button>
+            </div>
+
+            <!-- ONLY ONE MAP -->
+            <div id="map" style="height: 500px; border-radius: 12px;"></div>
+        </div>
+    </section>
 
 
     <!-- footer -->

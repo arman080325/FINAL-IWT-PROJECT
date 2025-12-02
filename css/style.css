@@ -551,6 +551,32 @@ header .container {
   z-index: 1;
 }
 
+/* Show glow when input is focused */
+.glow-wrapper:focus-within::before {
+  opacity: 1;
+}
+
+/* Glow Effect */
+.glow-wrapper::before {
+  content: "";
+  background: linear-gradient(
+    45deg,
+    #2f25bd, #FF7300, #FFFB00, #48FF00,
+    #00FFD5, #002BFF, #e219d2, #FF0000
+  );
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
+  border-radius: 12px;
+  filter: blur(8px);
+  background-size: 600%;
+  animation: glowing 20s linear infinite;
+  z-index: 0;
+  opacity: 0; /* hidden by default */
+  transition: opacity .3s ease-in-out;
+}
 .highlight {
     color: #00ff9d;
     font-weight: 800;
@@ -1698,3 +1724,332 @@ header.header-sm{
   }
 }
 
+
+/* ===== Map container (replace your old #map block) ===== */
+#map {
+  width: 100%;
+  height: 520px;
+  margin-top: 1.5rem;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 14px 40px rgba(2, 8, 23, 0.25);
+}
+
+/* ===== Map toolbar (chips, toggle, geocoder, locate button) ===== */
+:root{
+  --brand-a: #14b8a6; /* teal */
+  --brand-b: #06b6d4; /* cyan */
+  --chip-text: #0f172a;
+  --chip-bg: rgba(15, 23, 42, 0.06);
+  --glass-bg: rgba(255,255,255,0.75);
+  --glass-border: rgba(255,255,255,0.45);
+}
+
+.map-controls{
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: .7rem .8rem;
+  border-radius: 14px;
+  background: var(--glass-bg);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 10px 30px rgba(2, 8, 23, 0.10);
+}
+
+/* Locate button (pill) */
+#btn-locate{
+  border: none;
+  padding: .65rem 1rem;
+  border-radius: 9999px;
+  color: #fff;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--brand-a), var(--brand-b));
+  box-shadow:
+    0 10px 20px rgba(6,182,212,.25),
+    inset 0 1px 0 rgba(255,255,255,.25);
+  cursor: pointer;
+  transition: transform .15s ease, box-shadow .2s ease, filter .2s ease;
+}
+#btn-locate:hover{ transform: translateY(-1px); filter: brightness(1.02); }
+#btn-locate:active{ transform: translateY(0); box-shadow: 0 8px 18px rgba(6,182,212,.25); }
+
+/* Chip-style filters (no HTML change needed) */
+.map-controls input[type="checkbox"]{
+  position: absolute; /* visually hide the native checkbox */
+  opacity: 0;
+  pointer-events: none;
+}
+
+.map-controls label{
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
+  margin: 4px;
+  padding: .55rem .9rem .55rem 2.3rem;
+  border-radius: 9999px;
+  font-size: 14px;
+  color: var(--chip-text);
+  background: var(--chip-bg);
+  border: 1px solid rgba(15,23,42,0.08);
+  cursor: pointer;
+  transition: background .2s ease, border-color .2s ease, box-shadow .2s ease, color .2s ease;
+  user-select: none;
+}
+
+/* Circular indicator on chips */
+.map-controls label::before{
+  content: "";
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  background: #fff;
+  border: 2px solid rgba(15,23,42,0.30);
+  transition: all .2s ease;
+}
+
+/* Selected chip (using :has to detect checked input) */
+.map-controls label:has(input:checked){
+  background: linear-gradient(180deg, rgba(16,185,129,.14), rgba(16,185,129,.06));
+  border-color: rgba(16,185,129,.45);
+  box-shadow: inset 0 0 0 1px rgba(16,185,129,.18);
+}
+.map-controls label:has(input:checked)::before{
+  background: #10b981;
+  border-color: #10b981;
+  box-shadow: inset 0 0 0 3px #fff;
+}
+
+/* Heatmap toggle: make the last label a switch */
+.map-controls label:last-child{
+  margin-left: auto;
+  padding-left: 64px;
+  padding-right: 12px;
+}
+.map-controls label:last-child::before{
+  /* slider track */
+  width: 46px; height: 26px;
+  border-radius: 9999px;
+  background: #e5e7eb;
+  border: none;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,.12);
+}
+.map-controls label:last-child::after{
+  /* slider knob */
+  content: "";
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 2px 4px rgba(0,0,0,.15);
+  transition: left .2s ease;
+}
+.map-controls label:last-child:has(input:checked)::before{ background: #10b981; }
+.map-controls label:last-child:has(input:checked)::after{ left: 34px; }
+
+/* Mapbox Geocoder – rounded + subtle shadow */
+.mapboxgl-ctrl-geocoder{
+  min-width: 260px;
+  max-width: 420px;
+  border-radius: 9999px !important;
+  background: rgba(255,255,255,.9);
+  border: 1px solid rgba(0,0,0,.06);
+  box-shadow: 0 8px 20px rgba(2, 8, 23, 0.10);
+}
+.mapboxgl-ctrl-geocoder--input{
+  border-radius: 9999px !important;
+  padding: 10px 16px 10px 42px !important;
+}
+
+/* Mapbox built-in controls (zoom/fullscreen/geolocate) */
+.mapboxgl-ctrl-top-left{ margin: 12px; }
+.mapboxgl-ctrl-group{
+  border-radius: 12px !important;
+  overflow: hidden;
+  box-shadow: 0 10px 24px rgba(2,8,23,.25);
+}
+.mapboxgl-ctrl button{ width: 36px; height: 36px; }
+
+/* Popups: softer card */
+.mapboxgl-popup{ max-width: 280px; }
+.mapboxgl-popup-content{
+  border-radius: 12px !important;
+  box-shadow: 0 14px 40px rgba(2,8,23,.25);
+  padding: 12px 14px !important;
+}
+.mapboxgl-popup .btn-save{
+  background: #0ea5e9;
+  color: #fff;
+  border: none;
+  padding: .5rem .75rem;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.mapboxgl-popup .btn-save:hover{ filter: brightness(1.06); }
+
+/* Toast (if you want smoother fade than inline style) */
+#toast{
+  transition: opacity .25s ease;
+}
+
+/* Responsive tweaks */
+@media (max-width: 1024px){
+  #map{ height: 480px; }
+}
+@media (max-width: 768px){
+  #map{ height: 420px; }
+  .map-controls{ padding: .55rem .6rem; }
+  .map-controls label{ font-size: 13px; padding: .5rem .75rem .5rem 2rem; }
+}
+
+
+/* Added Map css */
+/* ========= Center the whole toolbar ========= */
+.map-controls{
+  justify-content: center;            /* center everything */
+  gap: 10px;
+}
+
+/* If geocoder is present, keep it alongside & centered */
+#map-geocoder{ order: 1; }
+
+/* Put Locate first in flow, then chips, but all centered together */
+#btn-locate{ order: 0; }
+.map-controls label{ order: 2; }
+
+/* Remove the old "push right" behavior for Heatmap */
+.map-controls label:last-child{ margin-left: 0; }
+
+/* ========= Locate me — richer animation ========= */
+:root{
+  --brand-a: #14b8a6; /* teal */
+  --brand-b: #06b6d4; /* cyan */
+}
+
+/* animated gradient + float + pulse ring + ripple */
+@keyframes gradientShift {
+  0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%}
+}
+@keyframes floaty {
+  0%,100%{ transform: translateY(0) }
+  50%{ transform: translateY(-2px) }
+}
+@keyframes pulseRing {
+  0%   { transform: scale(.9);  opacity:.7; box-shadow: 0 0 0 0 rgba(20,184,166,.45) }
+  70%  { transform: scale(1.15);opacity:0;  box-shadow: 0 0 0 14px rgba(20,184,166,0) }
+  100% { opacity:0; }
+}
+@keyframes clickRipple {
+  to { transform: translate(-50%,-50%) scale(12); opacity: 0; }
+}
+
+#btn-locate{
+  position: relative;
+  border: none;
+  padding: .70rem 1.15rem;
+  border-radius: 9999px;
+  color: #fff;
+  font-weight: 800;
+  letter-spacing: .2px;
+  background: linear-gradient(135deg, var(--brand-a), var(--brand-b));
+  background-size: 200% 200%;
+  cursor: pointer;
+  box-shadow: 0 12px 24px rgba(6,182,212,.25), inset 0 1px 0 rgba(255,255,255,.35);
+  transition: transform .15s ease, filter .2s ease, box-shadow .2s ease;
+  /* animations */
+  animation: gradientShift 6s ease infinite, floaty 3s ease-in-out infinite;
+  overflow: hidden;
+}
+
+/* soft pulse ring */
+#btn-locate::before{
+  content:"";
+  position:absolute; inset:-6px;
+  border-radius:inherit;
+  border:2px solid rgba(20,184,166,.35);
+  animation: pulseRing 2.2s ease-out infinite;
+  pointer-events:none;
+}
+
+/* click ripple from center (CSS-only) */
+#btn-locate::after{
+  content:"";
+  position:absolute; left:50%; top:50%;
+  width:12px; height:12px; border-radius:50%;
+  transform: translate(-50%,-50%) scale(0);
+  background: rgba(255,255,255,.45);
+  pointer-events:none;
+}
+#btn-locate:active{ transform: translateY(0); filter: brightness(1.02); }
+#btn-locate:active::after{ animation: clickRipple .6s ease-out forwards; }
+
+/* stronger hover pop */
+#btn-locate:hover{ transform: translateY(-1px); filter: brightness(1.04); }
+
+/* ========= Chips remain from previous styling (centered now) ========= */
+.map-controls input[type="checkbox"]{ position:absolute; opacity:0; pointer-events:none; }
+
+.map-controls label{
+  position: relative;
+  display: inline-flex; align-items: center;
+  gap: .45rem; margin: 4px;
+  padding: .55rem .9rem .55rem 2.3rem;
+  border-radius: 9999px; font-size: 14px;
+  color: #0f172a;
+  background: rgba(15, 23, 42, 0.06);
+  border: 1px solid rgba(15,23,42,0.08);
+  cursor: pointer; user-select: none;
+  transition: background .2s ease, border-color .2s ease, box-shadow .2s ease, color .2s ease;
+}
+
+.map-controls label::before{
+  content: ""; position: absolute; left: 10px; top: 50%;
+  transform: translateY(-50%); width: 18px; height: 18px;
+  border-radius: 50%; background: #fff; border: 2px solid rgba(15,23,42,0.30);
+  transition: all .2s ease;
+}
+
+/* selected chip */
+.map-controls label:has(input:checked){
+  background: linear-gradient(180deg, rgba(16,185,129,.14), rgba(16,185,129,.06));
+  border-color: rgba(16,185,129,.45);
+  box-shadow: inset 0 0 0 1px rgba(16,185,129,.18);
+}
+.map-controls label:has(input:checked)::before{
+  background: #10b981; border-color: #10b981; box-shadow: inset 0 0 0 3px #fff;
+}
+
+/* Heatmap switch (still centered with the rest) */
+.map-controls label:last-child{
+  padding-left: 64px; padding-right: 12px;
+}
+.map-controls label:last-child::before{
+  width: 46px; height: 26px; border-radius: 9999px;
+  background: #e5e7eb; border: none; box-shadow: inset 0 2px 4px rgba(0,0,0,.12);
+}
+.map-controls label:last-child::after{
+  content: ""; position: absolute; left: 12px; top: 50%;
+  transform: translateY(-50%); width: 22px; height: 22px;
+  border-radius: 50%; background: #fff; box-shadow: 0 2px 4px rgba(0,0,0,.15);
+  transition: left .2s ease;
+}
+.map-controls label:last-child:has(input:checked)::before{ background: #10b981; }
+.map-controls label:last-child:has(input:checked)::after{ left: 34px; }
+
+/* Responsive */
+@media (max-width: 768px){
+  .map-controls{ padding: .55rem .6rem; }
+  .map-controls label{ font-size: 13px; padding: .5rem .75rem .5rem 2rem; }
+}
+/* Put Locate on its own line (optional) */
+#btn-locate{ flex-basis: 100%; align-self: center; text-align: center; }
