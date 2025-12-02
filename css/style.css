@@ -609,6 +609,26 @@ header .container {
     color: var(--green);
 }
 
+/* Make the login button prominent when navbar switches to the white background */
+.navbar-cng .nav-login-btn{
+    background: var(--green) !important;
+    color: #fff !important;
+    border-color: transparent !important;
+    box-shadow: 0 10px 30px rgba(18,239,103,0.18);
+    transform: translateY(0);
+}
+.navbar-cng .nav-login-btn:hover{
+    transform: translateY(-3px);
+    box-shadow: 0 12px 36px rgba(18,239,103,0.26);
+}
+
+/* Ensure login button is also visible on login-page when navbar becomes white */
+.login-page .navbar.navbar-cng .nav-login-btn{
+    background: var(--green) !important;
+    color: #fff !important;
+    border-color: transparent !important;
+}
+
 .neon {
   border: none;
   outline: none;
@@ -1502,6 +1522,33 @@ header.header-sm{
         0 0 45px rgba(18,239,103,0.6);
     
     border-color: rgba(255,255,255,0.55);
+}
+/* Make navbar visible on pages like login where background is dark
+   - login-page: apply a semi-opaque dark navbar so links are readable
+   - keep navbar fixed and high z-index so it remains visible while scrolling
+*/
+.login-page .navbar{
+    background: rgba(0,0,0,0.55) !important;
+    backdrop-filter: blur(6px);
+}
+.login-page .navbar .site-brand,
+.login-page .navbar .nav-link,
+.login-page .navbar #navbar-show-btn{
+    color: #fff !important;
+}
+.login-page .navbar .nav-login-btn{
+    background: rgba(255,255,255,0.12);
+    color: #fff;
+    border-color: rgba(255,255,255,0.25);
+}
+
+/* Ensure visible contrast when navbar switches to white on scroll */
+.login-page .navbar.navbar-cng{
+    background-color: #fff;
+}
+.login-page .navbar.navbar-cng .site-brand,
+.login-page .navbar.navbar-cng .nav-link{
+    color: var(--dark) !important;
 }
 .flight-hotel-buttons {
   display: flex;
