@@ -25,3 +25,6 @@ yarn-error.log*
 # OS junk files
 .DS_Store
 Thumbs.db
+
+out/
+/out/
