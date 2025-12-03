@@ -3,76 +3,161 @@
 ------------------------------------------ */
 
 const urlParams = new URLSearchParams(window.location.search);
-const roomType = urlParams.get("room");
+const roomType = urlParams.get("room") || "standard"; // standard / deluxe / suite...
 const checkin = urlParams.get("checkin");
 const checkout = urlParams.get("checkout");
-const guests = urlParams.get("guests");
-const city = urlParams.get("city"); // NEW: dynamic city
+const guests = urlParams.get("guests") || "1";
+const city = urlParams.get("city") || "Your destination";
+const priceFromSearch = Number(urlParams.get("price") || "0"); // sent from hotel.js
 
 const summaryCard = document.getElementById("summaryCard");
 
 /* -----------------------------------------
-   2. Amadeus API Credentials
+   2. City → IATA mapping (same as hotel.js)
 ------------------------------------------ */
 
-const CLIENT_ID = "5pFgcNy5GPFi3BkvKTAI2cQvTs5tyeGi";
-const CLIENT_SECRET = "aZ1IcLAkKPjWMpdH";
+const cityToIATA = {
+  dubai: "DXB",
+  paris: "PAR",
+  london: "LON",
+  newyork: "NYC",
+  tokyo: "TYO",
+  mumbai: "BOM",
+  bangkok: "BKK",
+  singapore: "SIN",
+  istanbul: "IST",
+  barcelona: "BCN",
+  amsterdam: "AMS",
+  rome: "ROM",
+  berlin: "BER",
+  sydney: "SYD",
+  toronto: "YTO",
+  losangeles: "LAX",
+  chicago: "CHI",
+  "new york": "NYC",
+  "los angeles": "LAX",
+  "san francisco": "SFO"
+};
+
+/* -----------------------------------------
+   3. Amadeus API Credentials (same as hotel.js)
+------------------------------------------ */
+
+const CLIENT_ID = "7iyRdTgn8bDVKRkYaQYkTLdt0aAQz9mr";
+const CLIENT_SECRET = "lBtktFCiuaGve0OD";
 
 let AMADEUS_TOKEN = null;
 
 /* -----------------------------------------
-   3. Get Amadeus Access Token
+   4. Get Amadeus Access Token
 ------------------------------------------ */
 
 async function getToken() {
-  const res = await fetch(
-    "https://test.api.amadeus.com/v1/security/oauth2/token",
-    {
-      method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: `grant_type=client_credentials&client_id=${CLIENT_ID}&client_secret=${CLIENT_SECRET}`
-    }
-  );
-
-  const data = await res.json();
-  AMADEUS_TOKEN = data.access_token;
-  return data.access_token;
-}
-
-/* -----------------------------------------
-   4. Fetch Real-Time Hotel Prices (dynamic city)
------------------------------------------- */
-
-async function getRealPrice(token) {
-  const url = `https://test.api.amadeus.com/v3/shopping/hotel-offers?cityCode=${city}&checkInDate=${checkin}&checkOutDate=${checkout}&adults=${guests}&roomQuantity=1`;
-
-  const res = await fetch(url, {
-    headers: { Authorization: `Bearer ${token}` }
-  });
-
-  const data = await res.json();
+  if (AMADEUS_TOKEN) return AMADEUS_TOKEN; // reuse if already fetched
 
   try {
-    const offer = data.data[0].offers[0].price;
-    return Number(offer.total); // AED
-  } catch (e) {
-    console.warn("Amadeus returned no valid prices. Using fallback ₹500.");
-    return 500;
+    const res = await fetch(
+      "https://test.api.amadeus.com/v1/security/oauth2/token",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body:
+          "grant_type=client_credentials" +
+          `&client_id=${CLIENT_ID}` +
+          `&client_secret=${CLIENT_SECRET}`
+      }
+    );
+
+    const data = await res.json();
+    console.log("TOKEN RESPONSE (booking):", data);
+
+    if (!data.access_token) {
+      console.error("Amadeus token error:", data);
+      return null;
+    }
+
+    AMADEUS_TOKEN = data.access_token;
+    return AMADEUS_TOKEN;
+  } catch (err) {
+    console.error("TOKEN FETCH FAILED (booking):", err);
+    return null;
   }
 }
 
 /* -----------------------------------------
-   5. Calculate Number of Nights
+   5. Resolve IATA from city (sync with hotel.js)
+------------------------------------------ */
+
+function getIataFromCity(cityName) {
+  if (!cityName) return null;
+  const val = cityName.toLowerCase().trim();
+
+  const foundKey = Object.keys(cityToIATA).find(
+    (c) => c.includes(val) || val.includes(c)
+  );
+  return foundKey ? cityToIATA[foundKey] : null;
+}
+
+/* -----------------------------------------
+   6. Fetch Real-Time Hotel Prices (dynamic city)
+------------------------------------------ */
+
+async function getRealPrice() {
+  const token = await getToken();
+  if (!token) {
+    console.warn("No token – using price from search or fallback 500.");
+    return priceFromSearch || 500;
+  }
+
+  const iataCode = getIataFromCity(city);
+  if (!iataCode) {
+    console.warn("City not mapped to IATA – using price from search or fallback 500.");
+    return priceFromSearch || 500;
+  }
+
+  const url =
+    "https://test.api.amadeus.com/v3/shopping/hotel-offers?" +
+    `cityCode=${iataCode}` +
+    `&checkInDate=${checkin}` +
+    `&checkOutDate=${checkout}` +
+    `&adults=${guests}` +
+    `&roomQuantity=1` +
+    `&currency=AED`;
+
+  try {
+    const res = await fetch(url, {
+      headers: { Authorization: `Bearer ${token}` }
+    });
+
+    const data = await res.json();
+    console.log("Hotel API (booking):", data);
+
+    const offer = data?.data?.[0]?.offers?.[0]?.price?.total;
+    if (!offer) {
+      console.warn("No valid offer in response – using price from search or fallback 500.");
+      return priceFromSearch || 500;
+    }
+
+    return Number(offer); // AED total for stay
+  } catch (e) {
+    console.warn("Amadeus request failed – using price from search or fallback 500.", e);
+    return priceFromSearch || 500;
+  }
+}
+
+/* -----------------------------------------
+   7. Calculate Number of Nights
 ------------------------------------------ */
 
 function calcNights() {
+  if (!checkin || !checkout) return 0;
   const inDate = new Date(checkin);
   const outDate = new Date(checkout);
   return Math.round((outDate - inDate) / (1000 * 60 * 60 * 24));
 }
 
 /* -----------------------------------------
-   6. Load Summary with Real Pricing
+   8. Load Summary with Real Pricing
 ------------------------------------------ */
 
 async function loadSummary() {
@@ -83,16 +168,17 @@ async function loadSummary() {
     return;
   }
 
-  const token = await getToken();
-  const realPrice = await getRealPrice(token);
-
+  const realPrice = await getRealPrice(); // total for stay
   const nightly = realPrice / nights;
   const tax = realPrice * 0.12;
   const total = realPrice + tax;
 
+  const niceRoomLabel =
+    roomType.charAt(0).toUpperCase() + roomType.slice(1).replace("-", " ");
+
   summaryCard.innerHTML = `
     <h3>Booking Summary</h3>
-    <p><strong>Room Type:</strong> ${roomType.toUpperCase()}</p>
+    <p><strong>Room Type:</strong> ${niceRoomLabel}</p>
     <p><strong>Location:</strong> ${city}</p>
     <p><strong>Check-in:</strong> ${checkin}</p>
     <p><strong>Check-out:</strong> ${checkout}</p>
@@ -109,7 +195,7 @@ async function loadSummary() {
 loadSummary();
 
 /* -----------------------------------------
-   7. Capture Form & Produce DB-Ready Object
+   9. Capture Form & Produce DB-Ready Object
 ------------------------------------------ */
 
 document.getElementById("bookingForm").addEventListener("submit", function (e) {
@@ -148,8 +234,6 @@ document.getElementById("bookingForm").addEventListener("submit", function (e) {
   };
 
   console.log("BOOKING SAVED DATA:", bookingData);
-
   alert("Booking confirmed! Check console for stored booking data.");
-
-  // Later: send to DB, Firebase, MongoDB, etc.
+  // later: send to DB / backend etc.
 });

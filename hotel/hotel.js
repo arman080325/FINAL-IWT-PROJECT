@@ -1,323 +1,460 @@
-// ------- ROOM DATA (REAL LUXURY IMAGES + GALLERIES) -------
-const roomsData = [
+// ====== CITY → IATA CODE MAPPING (most popular) ======
+const cityToIATA = {
+  dubai: "DXB",
+  paris: "PAR",
+  london: "LON",
+  newyork: "NYC",
+  tokyo: "TYO",
+  mumbai: "BOM",
+  bangkok: "BKK",
+  singapore: "SIN",
+  istanbul: "IST",
+  barcelona: "BCN",
+  amsterdam: "AMS",
+  rome: "ROM",
+  berlin: "BER",
+  sydney: "SYD",
+  toronto: "YTO",
+  losangeles: "LAX",
+  chicago: "CHI",
+  "new york": "NYC",
+  "los angeles": "LAX",
+  "san francisco": "SFO",
+};
+
+let roomsData = [
   {
     id: "standard",
     name: "Standard Room",
     pricePerNight: 150,
+    maxGuests: 2,
     badge: "Best for Solo & Couples",
     image:
       "https://images.pexels.com/photos/237371/pexels-photo-237371.jpeg?auto=compress&cs=tinysrgb&w=1600",
     gallery: [
-      "https://images.pexels.com/photos/237371/pexels-photo-237371.jpeg?auto=compress&cs=tinysrgb&w=1600",
-      "https://images.pexels.com/photos/279746/pexels-photo-279746.jpeg?auto=compress&cs=tinysrgb&w=1600",
-      "https://images.pexels.com/photos/189296/pexels-photo-189296.jpeg?auto=compress&cs=tinysrgb&w=1600"
+      "https://images.pexels.com/photos/237371/pexels-photo-237371.jpeg",
+      "https://images.pexels.com/photos/164595/pexels-photo-164595.jpeg",
+      "https://images.pexels.com/photos/261102/pexels-photo-261102.jpeg",
+      "https://images.pexels.com/photos/271639/pexels-photo-271639.jpeg",
+      "https://images.pexels.com/photos/279746/pexels-photo-279746.jpeg",
+      "https://images.pexels.com/photos/1454806/pexels-photo-1454806.jpeg",
+      "https://images.pexels.com/photos/271624/pexels-photo-271624.jpeg",
+      "https://images.pexels.com/photos/1743227/pexels-photo-1743227.jpeg",
+      "https://images.pexels.com/photos/164595/pexels-photo-164595.jpeg",
+      "https://images.pexels.com/photos/262048/pexels-photo-262048.jpeg"
     ],
     features: [
-      "Queen size bed",
-      "City view window",
-      "Free high-speed Wi-Fi",
-      "55\" Smart TV",
-      "Complimentary coffee & tea"
+      "Queen-size bed",
+      "Air conditioning",
+      "Free Wi-Fi",
+      "LED Smart TV",
+      "Private bathroom",
+      "Complimentary toiletries",
+      "Daily housekeeping"
     ],
-    maxGuests: 2
   },
+
   {
     id: "deluxe",
     name: "Deluxe Room",
     pricePerNight: 250,
-    badge: "Most Popular Choice",
+    maxGuests: 3,
+    badge: "Most Popular",
     image:
       "https://images.pexels.com/photos/271639/pexels-photo-271639.jpeg?auto=compress&cs=tinysrgb&w=1600",
     gallery: [
-      "https://images.pexels.com/photos/271639/pexels-photo-271639.jpeg?auto=compress&cs=tinysrgb&w=1600",
-      "https://images.pexels.com/photos/26139/pexels-photo-26139.jpg?auto=compress&cs=tinysrgb&w=1600",
-      "https://images.pexels.com/photos/271639/pexels-photo-271639.jpeg?auto=compress&cs=tinysrgb&w=1600"
+      "https://images.pexels.com/photos/271639/pexels-photo-271639.jpeg",
+      "https://images.pexels.com/photos/276724/pexels-photo-276724.jpeg",
+      "https://images.pexels.com/photos/271624/pexels-photo-271624.jpeg",
+      "https://images.pexels.com/photos/210604/pexels-photo-210604.jpeg",
+      "https://images.pexels.com/photos/261102/pexels-photo-261102.jpeg",
+      "https://images.pexels.com/photos/279746/pexels-photo-279746.jpeg",
+      "https://images.pexels.com/photos/271651/pexels-photo-271651.jpeg",
+      "https://images.pexels.com/photos/1571459/pexels-photo-1571459.jpeg"
     ],
     features: [
-      "King size bed",
-      "Partial sea or skyline view",
-      "Nespresso machine",
-      "Rain shower bathroom",
-      "Cozy seating area"
+      "King-size bed",
+      "City view",
+      "Air conditioning",
+      "Free high-speed Wi-Fi",
+      "55-inch Smart TV",
+      "Spacious bathroom",
+      "Tea & coffee maker",
+      "Mini-fridge",
+      "Work desk"
     ],
-    maxGuests: 3
   },
+
   {
     id: "suite",
     name: "Executive Suite",
     pricePerNight: 400,
-    badge: "Perfect for Family Stays",
+    maxGuests: 4,
+    badge: "Family Friendly",
     image:
       "https://images.pexels.com/photos/276724/pexels-photo-276724.jpeg?auto=compress&cs=tinysrgb&w=1600",
     gallery: [
-      "https://images.pexels.com/photos/276724/pexels-photo-276724.jpeg?auto=compress&cs=tinysrgb&w=1600",
-      "https://images.pexels.com/photos/1454806/pexels-photo-1454806.jpeg?auto=compress&cs=tinysrgb&w=1600",
-      "https://images.pexels.com/photos/271639/pexels-photo-271639.jpeg?auto=compress&cs=tinysrgb&w=1600"
+      "https://images.pexels.com/photos/276724/pexels-photo-276724.jpeg",
+      "https://images.pexels.com/photos/2835547/pexels-photo-2835547.jpeg",
+      "https://images.pexels.com/photos/2838783/pexels-photo-2838783.jpeg",
+      "https://images.pexels.com/photos/271639/pexels-photo-271639.jpeg",
+      "https://images.pexels.com/photos/279746/pexels-photo-279746.jpeg",
+      "https://images.pexels.com/photos/260922/pexels-photo-260922.jpeg",
+      "https://images.pexels.com/photos/164595/pexels-photo-164595.jpeg",
+      "https://images.pexels.com/photos/1743231/pexels-photo-1743231.jpeg",
+      "https://images.pexels.com/photos/261102/pexels-photo-261102.jpeg",
+      "https://images.pexels.com/photos/3155726/pexels-photo-3155726.jpeg"
     ],
     features: [
       "Separate living area",
-      "Dining corner",
-      "Walk-in wardrobe",
-      "Bathtub & rain shower",
-      "Complimentary lounge access"
+      "King-size bed",
+      "Panoramic city view",
+      "Premium bathroom amenities",
+      "High-speed Wi-Fi",
+      "Large Smart TV",
+      "Dining table",
+      "Mini-bar",
+      "Complimentary breakfast"
     ],
-    maxGuests: 4
   },
+
   {
     id: "presidential",
     name: "Presidential Suite",
     pricePerNight: 800,
-    badge: "Ultra-Luxury Experience",
+    maxGuests: 6,
+    badge: "Ultra Luxury",
     image:
       "https://images.pexels.com/photos/2838783/pexels-photo-2838783.jpeg?auto=compress&cs=tinysrgb&w=1600",
     gallery: [
-      "https://images.pexels.com/photos/2838783/pexels-photo-2838783.jpeg?auto=compress&cs=tinysrgb&w=1600",
-      "https://images.pexels.com/photos/96444/pexels-photo-96444.jpeg?auto=compress&cs=tinysrgb&w=1600",
-      "https://images.pexels.com/photos/1454806/pexels-photo-1454806.jpeg?auto=compress&cs=tinysrgb&w=1600"
+      "https://images.pexels.com/photos/2838783/pexels-photo-2838783.jpeg",
+      "https://images.pexels.com/photos/189333/pexels-photo-189333.jpeg",
+      "https://images.pexels.com/photos/1743231/pexels-photo-1743231.jpeg",
+      "https://images.pexels.com/photos/164595/pexels-photo-164595.jpeg",
+      "https://images.pexels.com/photos/276724/pexels-photo-276724.jpeg",
+      "https://images.pexels.com/photos/260922/pexels-photo-260922.jpeg",
+      "https://images.pexels.com/photos/271639/pexels-photo-271639.jpeg",
+      "https://images.pexels.com/photos/3155726/pexels-photo-3155726.jpeg",
+      "https://images.pexels.com/photos/279746/pexels-photo-279746.jpeg",
+      "https://images.pexels.com/photos/261102/pexels-photo-261102.jpeg"
     ],
     features: [
-      "Two king bedrooms",
-      "Private plunge pool",
-      "Panoramic skyline or ocean view",
-      "Butler on call 24/7",
-      "In-suite bar & workspace"
+      "2-bedroom suite",
+      "Private lounge area",
+      "Premium king-size beds",
+      "Private jacuzzi",
+      "Luxury marble bathroom",
+      "Dedicated workspace",
+      "24/7 butler service",
+      "In-room dining service",
+      "High-speed Wi-Fi",
+      "VIP airport pickup (available on request)"
     ],
-    maxGuests: 6
-  }
+  },
 ];
 
+
+// Fill galleries quickly (you already had them – just shortened here for space)
+// roomsData.forEach((room, i) => {
+//   room.gallery = [
+//     room.image,
+//     `https://images.pexels.com/photos/27${i}639/pexels-photo-27${i}639.jpeg?auto=compress&cs=tinysrgb&w=1600`,
+//     `https://images.pexels.com/photos/1454806/pexels-photo-1454806.jpeg?auto=compress&cs=tinysrgb&w=1600`,
+//   ];
+//   room.features = room.features || [
+//     "King bed",
+//     "City view",
+//     "Free Wi-Fi",
+//     "Minibar",
+//     "24h Room Service",
+//   ];
+// });
+
 let selectedRoomId = "standard";
+let currentIATACode = null;
 
-// ------- AMADEUS API CONFIG -------
-const AMADEUS_API_KEY = "5pFgcNy5GPFi3BkvKTAI2cQvTs5tyeGi";
-const AMADEUS_API_SECRET = "aZ1IcLAkKPjWMpdH";
+// ====== AMADEUS TOKEN ======
 let AMADEUS_TOKEN = null;
+async function getToken() {
+  try {
+    const resp = await fetch(
+      "https://test.api.amadeus.com/v1/security/oauth2/token",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body:
+          "grant_type=client_credentials" +
+          "&client_id=7iyRdTgn8bDVKRkYaQYkTLdt0aAQz9mr" +
+          "&client_secret=lBtktFCiuaGve0OD"
+      }
+    );
 
-// Fetch token
-async function getAmadeusToken() {
-  const response = await fetch("https://test.api.amadeus.com/v1/security/oauth2/token", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/x-www-form-urlencoded"
-    },
-    body: `grant_type=client_credentials&client_id=${AMADEUS_API_KEY}&client_secret=${AMADEUS_API_SECRET}`
-  });
+    const data = await resp.json();
+    console.log("TOKEN:", data);
 
-  const data = await response.json();
-  AMADEUS_TOKEN = data.access_token;
-  console.log("Amadeus Token:", AMADEUS_TOKEN);
+    if (!data.access_token) {
+      alert("Token error: " + JSON.stringify(data));
+      return null;
+    }
+
+    AMADEUS_TOKEN = data.access_token;
+    return data.access_token;
+  } catch (err) {
+    console.error("TOKEN FETCH FAILED", err);
+    return null;
+  }
 }
 
-// ------- UTILITIES -------
-function formatCurrency(amount) {
-  return "AED" + amount.toLocaleString("en-IN");
+// ====== FETCH REAL PRICES FROM AMADEUS ======
+async function searchHotels() {
+  const cityInput = document
+    .getElementById("cityInput")
+    .value.trim()
+    .toLowerCase();
+  const checkin = document.getElementById("checkin").value;
+  const checkout = document.getElementById("checkout").value;
+  const guests = document.getElementById("guests").value;
+
+  if (!cityInput || !checkin || !checkout) return;
+
+  // Find IATA
+  const found = Object.keys(cityToIATA).find(
+    (c) => c.includes(cityInput) || cityInput.includes(c)
+  );
+  if (!found) {
+    alert("City not supported yet. Try Dubai, Paris, London, etc.");
+    return;
+  }
+  currentIATACode = cityToIATA[found];
+
+if (!AMADEUS_TOKEN) AMADEUS_TOKEN = await getToken();
+if (!AMADEUS_TOKEN) {
+   console.error("Token missing, cannot fetch hotels.");
+   return;
 }
 
-function diffInNights(checkin, checkout) {
-  const inDate = new Date(checkin);
-  const outDate = new Date(checkout);
-  const diff = outDate - inDate;
-  return diff > 0 ? Math.round(diff / (1000 * 60 * 60 * 24)) : 0;
+  // Add these parameters for better results
+const url =
+  "https://test.api.amadeus.com/v3/shopping/hotel-offers?" +
+  `cityCode=${currentIATACode}` +
+  `&checkInDate=${checkin}` +
+  `&checkOutDate=${checkout}` +
+  `&adults=${guests}` +
+  `&roomQuantity=1` +
+  `&currency=AED`;
+
+
+  try {
+    const res = await fetch(url, {
+      headers: { Authorization: `Bearer ${AMADEUS_TOKEN}` },
+    });
+    const json = await res.json();
+
+    if (!json.data || json.data.length === 0) {
+      document.getElementById("booking-summary").innerHTML =
+        "Live prices temporarily unavailable – showing beautiful sample rates";
+      return;
+    }
+
+    // Get average price per night for each category
+    const offers = json.data.map((h) => ({
+      price: Math.round(
+        parseFloat(h.offers[0].price.total) / diffInNights(checkin, checkout)
+      ),
+    }));
+
+    // Update room prices (simple mapping: cheapest → standard, then deluxe, suite, presidential)
+    const prices = offers.sort((a, b) => a.price - b.price).map((o) => o.price);
+    roomsData[0].pricePerNight = prices[0] || 150;
+    roomsData[1].pricePerNight = prices[1] || 250;
+    roomsData[2].pricePerNight = prices[2] || 400;
+    roomsData[3].pricePerNight = prices[3] || 800;
+
+    renderRooms();
+    updateBookingSummary();
+  } catch (err) {
+    console.error(err);
+    alert(
+      "Live pricing temporarily unavailable – using beautiful sample rates."
+    );
+  }
 }
 
-// ------- RENDER ROOMS -------
+// ====== UTILITIES ======
+function diffInNights(a, b) {
+  return Math.round((new Date(b) - new Date(a)) / 86400000);
+}
+function formatCurrency(n) {
+  return "AED" + Math.round(n).toLocaleString();
+}
+
+// ====== RENDER ROOMS ======
 function renderRooms() {
   const container = document.getElementById("rooms-container");
   container.innerHTML = "";
 
-  roomsData.forEach(room => {
-    const featuresLi = room.features.map(f => `<li>${f}</li>`).join("");
-
+  roomsData.forEach((room) => {
     const card = document.createElement("div");
-    card.classList.add("room-card");
-
+    card.className =
+      "room-card" + (selectedRoomId === room.id ? " selected" : "");
     card.innerHTML = `
       <div class="room-image-wrapper">
         <img src="${room.image}" class="room-image" alt="${room.name}">
         <span class="room-badge">${room.badge}</span>
       </div>
-
       <div class="room-body">
         <div class="room-header-line">
           <h3>${room.name}</h3>
-          <p class="room-price">AED${room.pricePerNight}/night</p>
+          <p class="room-price">${formatCurrency(
+            room.pricePerNight
+          )}<small>/night</small></p>
         </div>
-
-        <div class="room-meta">
-          Max ${room.maxGuests} guests
-        </div>
-
-        <ul class="room-features">${featuresLi}</ul>
-
-        <button class="btn-outline" data-gallery="${room.id}">View Photos</button>
-        <button class="btn-solid" data-select-room="${room.id}">Select Room</button>
-        <button class="book-btn" data-roombook="${room.id}">Book Now</button>
+        <div class="room-meta">Up to ${room.maxGuests} guests</div>
+        <ul class="room-features">${room.features
+          .map((f) => `<li>${f}</li>`)
+          .join("")}</ul>
+        <button class="btn-outline" data-gallery="${
+          room.id
+        }">View Gallery</button>
+        <button class="btn-solid ${
+          selectedRoomId === room.id ? "active" : ""
+        }" data-select="${room.id}">Select Room</button>
+        <button class="book-btn" data-book="${room.id}">Book Now →</button>
       </div>
     `;
-
     container.appendChild(card);
   });
 }
 
-// ------- BOOKING SUMMARY -------
+// ====== UPDATE SUMMARY ======
 function updateBookingSummary() {
-  const city = document.getElementById("city").value;
+  const city = document.getElementById("cityInput").value || "your destination";
   const checkin = document.getElementById("checkin").value;
   const checkout = document.getElementById("checkout").value;
-  const guests = Number(document.getElementById("guests").value);
-
-  const summaryEl = document.getElementById("booking-summary");
-
-  const room = roomsData.find(r => r.id === selectedRoomId);
-  if (!room) return;
+  const guests = document.getElementById("guests").value;
 
   const nights = diffInNights(checkin, checkout);
-
-  if (!city || !checkin || !checkout || nights <= 0) {
-    summaryEl.innerHTML = "Please select valid city and dates to see the cost.";
+  if (nights <= 0 || !checkin || !checkout) {
+    document.getElementById("booking-summary").textContent =
+      "Please select valid dates.";
     return;
   }
 
+  const room = roomsData.find((r) => r.id === selectedRoomId);
   const base = nights * room.pricePerNight;
-  const tax = base * 0.12;
+  const tax = Math.round(base * 0.12);
   const total = base + tax;
 
-  summaryEl.innerHTML = `
+  document.getElementById("booking-summary").innerHTML = `
     <strong>${room.name}</strong> in <strong>${city}</strong><br>
-    ${nights} nights • ${guests} guests<br>
-    <strong>Total: ${formatCurrency(total)}</strong>
+    ${nights} night${nights > 1 ? "s" : ""} • ${guests} guest${
+    guests > 1 ? "s" : ""
+  }<br><br>
+    <strong style="font-size:1.3em;color:var(--accent)">Total: ${formatCurrency(
+      total
+    )}</strong> (incl. taxes)
   `;
 }
 
-// ------- GALLERY MODAL -------
-function openGallery(roomId) {
-  const room = roomsData.find(r => r.id === roomId);
-
-  document.getElementById("galleryTitle").textContent = room.name;
-  document.getElementById("galleryImages").innerHTML = room.gallery
-    .map(img => `<img src="${img}" alt="${room.name}">`)
-    .join("");
-
-  document.getElementById("galleryModal").classList.add("show");
-}
-
-function closeGallery() {
-  document.getElementById("galleryModal").classList.remove("show");
-}
-
-// ------- MAIN EVENT HANDLER -------
-document.addEventListener("DOMContentLoaded", () => {
-
-  // Render rooms initially
-  renderRooms();
-
-  // Default check-in/out dates
-  const today = new Date();
-  const tomorrow = new Date(today);
-  tomorrow.setDate(today.getDate() + 1);
-
-  document.getElementById("checkin").value = today.toISOString().split("T")[0];
-  document.getElementById("checkout").value =
-    tomorrow.toISOString().split("T")[0];
-
-  document.getElementById("year").textContent = new Date().getFullYear();
-
-  // Form submit → scroll
-  document
-    .getElementById("bookingForm")
-    .addEventListener("submit", (e) => {
-      e.preventDefault();
-      updateBookingSummary();
-      window.scrollTo({
-        top:
-          document.querySelector(".rooms-section").offsetTop - 50,
-        behavior: "smooth",
-      });
-    });
-
-  // Dropdown change
-  document
-    .getElementById("roomType")
-    .addEventListener("change", (e) => {
-      selectedRoomId = e.target.value;
-      renderRooms();
-      updateBookingSummary();
-    });
-
-  // Room action buttons
-  document
-    .getElementById("rooms-container")
-    .addEventListener("click", (e) => {
-      const galleryId = e.target.dataset.gallery;
-      const selectId = e.target.dataset.selectRoom;
-      const bookId = e.target.dataset.roombook;
-
-      if (galleryId) openGallery(galleryId);
-
-      if (selectId) {
-        selectedRoomId = selectId;
-        document.getElementById("roomType").value = selectId;
-        renderRooms();
-        updateBookingSummary();
-      }
-
-      if (bookId) {
-        const city = document.getElementById("city").value.trim();
-        const checkin = document.getElementById("checkin").value;
-        const checkout = document.getElementById("checkout").value;
-        const guests = document.getElementById("guests").value;
-
-        if (!city || !checkin || !checkout) {
-          alert("Please fill city and dates before booking.");
-          return;
-        }
-
-        window.location.href = 
-          `booking_form.html?room=${bookId}&city=${city}&checkin=${checkin}&checkout=${checkout}&guests=${guests}`;
-      }
-    });
-
-  // Close Modal
-  document
-    .querySelector(".close-modal")
-    .addEventListener("click", closeGallery);
-
-  document
-    .getElementById("galleryModal")
-    .addEventListener("click", (e) => {
-      if (e.target.id === "galleryModal") closeGallery();
-    });
-});
-
-// ------- FETCH REAL PRICES -------
-async function fetchRealHotelPrices(city, checkin, checkout, guests = 2) {
-  if (!AMADEUS_TOKEN) await getAmadeusToken();
-
-  const url = `https://test.api.amadeus.com/v3/shopping/hotel-offers?cityCode=${city}&adults=${guests}&checkInDate=${checkin}&checkOutDate=${checkout}&roomQuantity=1`;
-
-  const response = await fetch(url, {
-    headers: { Authorization: `Bearer ${AMADEUS_TOKEN}` },
-  });
-
-  const data = await response.json();
-
-  if (!data.data || data.data.length === 0) {
-    console.warn(
-      "No results from Amadeus → using default prices"
-    );
-    return null;
+// ====== CITY SUGGESTIONS ======
+document.getElementById("cityInput").addEventListener("input", function () {
+  const val = this.value.toLowerCase().trim();
+  const suggestions = document.getElementById("citySuggestions");
+  if (!val) {
+    suggestions.innerHTML = "";
+    return;
   }
 
-  const sorted = data.data.sort(
-    (a, b) => a.offers[0].price.total - b.offers[0].price.total
-  );
+  const matches = Object.keys(cityToIATA)
+    .filter((city) => city.includes(val) || val.includes(city))
+    .slice(0, 5);
 
-  return sorted.slice(0, 4).map((h) => ({
-    name: h.hotel.name,
-    price: Number(h.offers[0].price.total),
-    address: h.hotel.address.lines?.join(", ") || "",
-    rating:
-      h.hotel.rating || "N/A",
-    raw: h,
-  }));
-}
+  suggestions.innerHTML = matches
+    .map(
+      (c) =>
+        `<div class="suggestion-item">${
+          c.charAt(0).toUpperCase() + c.slice(1)
+        } (${cityToIATA[c]})</div>`
+    )
+    .join("");
+  suggestions.style.display = matches.length ? "block" : "none";
+});
+document.getElementById("citySuggestions").addEventListener("click", (e) => {
+  if (e.target.classList.contains("suggestion-item")) {
+    document.getElementById("cityInput").value =
+      e.target.textContent.split(" (")[0];
+    document.getElementById("citySuggestions").style.display = "none";
+  }
+});
+
+// ====== MAIN EVENTS ======
+document.addEventListener("DOMContentLoaded", () => {
+  const today = new Date().toISOString().split("T")[0];
+  const tomorrow = new Date(Date.now() + 86400000).toISOString().split("T")[0];
+  document.getElementById("checkin").value = today;
+  document.getElementById("checkout").value = tomorrow;
+  document.getElementById("year").textContent = new Date().getFullYear();
+
+  renderRooms();
+  updateBookingSummary();
+
+  // Search button
+  document.getElementById("bookingForm").addEventListener("submit", (e) => {
+    e.preventDefault();
+    searchHotels();
+    window.scrollTo({
+      top: document.querySelector(".rooms-section").offsetTop - 80,
+      behavior: "smooth",
+    });
+  });
+
+  // Room selection / gallery / booking
+  document.getElementById("rooms-container").addEventListener("click", (e) => {
+    const gallery = e.target.dataset.gallery;
+    const select = e.target.dataset.select;
+    const book = e.target.dataset.book;
+
+    if (gallery) {
+      const room = roomsData.find((r) => r.id === gallery);
+      document.getElementById("galleryTitle").textContent =
+        room.name + " Gallery";
+      document.getElementById("galleryImages").innerHTML = room.gallery
+        .map((src) => `<img src="${src}" alt="gallery">`)
+        .join("");
+      document.getElementById("galleryModal").classList.add("show");
+    }
+
+    if (select) {
+      selectedRoomId = select;
+      document.getElementById("roomType").value = select;
+      renderRooms();
+      updateBookingSummary();
+    }
+
+    if (book) {
+      const url = `booking_form.html?room=${book}&city=${encodeURIComponent(
+        document.getElementById("cityInput").value
+      )}&checkin=${document.getElementById("checkin").value}&checkout=${
+        document.getElementById("checkout").value
+      }&guests=${document.getElementById("guests").value}&price=${
+        roomsData.find((r) => r.id === book).pricePerNight
+      }`;
+      window.location.href = url;
+    }
+  });
+
+  // Sync dropdown
+  document.getElementById("roomType").addEventListener("change", (e) => {
+    selectedRoomId = e.target.value;
+    renderRooms();
+    updateBookingSummary();
+  });
+
+  // Close modal
+  document.querySelector(".close-modal").onclick = () =>
+    document.getElementById("galleryModal").classList.remove("show");
+  window.onclick = (e) => {
+    if (e.target === document.getElementById("galleryModal"))
+      document.getElementById("galleryModal").classList.remove("show");
+  };
+});
