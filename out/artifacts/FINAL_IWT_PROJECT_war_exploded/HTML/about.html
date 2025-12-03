@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>TripBoss</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- font awesome cdn -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+        integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- fonts -->
+    <!-- normalize css -->
+    <link rel="stylesheet" href="../css/normalize.css">
+    <!-- custom css -->
+    <link rel="stylesheet" href="../css/utility.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        /* header background */
+        header {
+            background: url('../images/header-bg.jpg') no-repeat center center;
+            background-size: cover;
+            /* ensures image covers the entire header */
+            position: relative;
+            color: #fff;
+            /* text color */
+        }
+
+        /* optional overlay to make text more readable */
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            /* change opacity for darkness */
+            z-index: 1;
+        }
+
+        header .container {
+            position: relative;
+            z-index: 2;
+            /* make sure text is above overlay */
+        }
+    </style>
+</head>
+
+<body>
+    <!-- navbar  -->
+    <nav class="navbar">
+        <div class="container flex">
+            <a href="../index.html" class="site-brand">
+                Trip<span class="logo-highlight">Boss</span>
+            </a>
+            <button type="button" id="navbar-show-btn" class="flex">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div id="navbar-collapse">
+                <button type="button" id="navbar-close-btn" class="flex">
+                    <i class="fas fa-times"></i>
+                </button>
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a href="../index.html" class="nav-link">Home</a></li>
+                    <li class="nav-item"><a href="gallery.html" class="nav-link">Gallery</a></li>
+                    <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
+                    <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
+                    <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+
+                    <!-- Tools Dropdown -->
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle">
+                            Tools <span class="material-icons">arrow_drop_down</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="../tools/html/cc.html">Currency Converter</a></li>
+                            <li><a href="../tools/html/lt.html">Language Translator</a></li>
+                            <li><a href="#">Coming Soon</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="login.html" class="nav-login-btn">✈ Login</a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- end of navbar  -->
+
+    <!-- header -->
+    <header class="flex header-sm">
+        <div class="container">
+            <div class="header-title">
+                <h1>About</h1>
+                <p>At TripBoss, we empower travelers to explore the world effortlessly. Discover destinations, compare
+                    flights, and plan unforgettable journeys — all in one place.</p>
+            </div>
+        </div>
+    </header>
+    <!-- header -->
+
+    <!-- about section -->
+    <section id="about" class="py-4">
+        <div class="container">
+            <div class="title-wrap">
+                <span class="sm-title">things to know about us</span>
+                <h2 class="lg-title">Our story</h2>
+            </div>
+
+            <div class="about-row">
+                <div class="about-left my-2">
+                    <img src="../images/about-img-1.jpg" alt="about img">
+                </div>
+                <div class="about-right">
+                    <h2>15 Years of Experience</h2>
+                    <p class="text">For more than 15 years, we’ve been crafting unforgettable travel experiences for
+                        explorers around the globe. What started as a small passion for adventure has grown into a
+                        trusted journey partner for thousands of travelers. From serene beaches to bustling city
+                        escapes, our team has helped people discover the beauty of the world in ways that are authentic,
+                        safe, and memorable.</p>
+
+                    <p class="text">Our goal has always been simple: to make travel stress-free, affordable, and full of
+                        joy. With years of expertise, a love for exploration, and countless happy stories from our
+                        travelers, we continue to inspire adventures that last a lifetime.</p>
+                </div>
+            </div>
+
+            <div class="title-wrap">
+                <h2 class="lg-title"></h2>
+            </div>
+
+            <div class="about-row" style="margin-top: -60px;">
+                <div class="about-right">
+                    <h2>Our Mission & Vision</h2>
+                    <p class="text">We believe travel is more than just reaching a destination—it’s about creating
+                        meaningful experiences that stay with you forever. Our mission is to design journeys that blend
+                        adventure, culture, and comfort, giving every traveler a chance to see the world in its truest
+                        form.</p>
+
+                    <p class="text">Looking ahead, our vision is to continue setting new standards in travel by offering
+                        personalized experiences, sustainable practices, and exceptional service. With every journey, we
+                        aim to inspire a deeper connection between people and the places they explore.</p>
+                </div>
+                <div class="about-left my-2">
+                    <img src="../images/about-img-2.jpg" alt="about img">
+                </div>
+            </div>
+
+        </div>
+    </section>
+    <!-- end of about section -->
+
+    <!-- facts section -->
+    <section id="facts" class="py-4 flex">
+        <div class="container">
+            <div class='title-wrap'>
+                <span class="sm-title">know some facts about our agency</span>
+                <h2 class="lg-title">fun facts</h2>
+            </div>
+
+            <div class="facts-row">
+                <div class="facts-item">
+                    <span class="fas fa-camera-retro facts-icon"></span>
+                    <div class="facts-info">
+                        <strong>1220</strong>
+                        <p class="text">photos taken</p>
+                    </div>
+                </div>
+
+                <div class="facts-item">
+                    <span class="fas fa-umbrella-beach  facts-icon"></span>
+                    <div class="facts-info">
+                        <strong>450</strong>
+                        <p class="text">beaches visited</p>
+                    </div>
+                </div>
+
+                <div class="facts-item">
+                    <span class="fas fa-mountain facts-icon"></span>
+                    <div class="facts-info">
+                        <strong>84</strong>
+                        <p class="text">mountains climbed</p>
+                    </div>
+                </div>
+
+                <div class="facts-item">
+                    <span class="fas fa-ship facts-icon"></span>
+                    <div class="facts-info">
+                        <strong>120</strong>
+                        <p class="text">cruises organized</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- end of facts section -->
+
+
+      <!-- footer -->
+    <footer class="py-4">
+        <div class="container footer-row">
+            <div class="footer-item">
+                <a href="../index.html" class="site-brand">
+                    Trip<span>Boss</span>
+                </a>
+                <p class="text">TripBoss is your smart travel companion that helps you discover amazing destinations,
+                    plan seamless trips, and enjoy hassle-free bookings. From breathtaking beaches to adventurous
+                    mountains, we bring the world closer to you with reliable recommendations, affordable deals, and
+                    trusted travel experiences — all in one place.</p>
+            </div>
+
+            <div class="footer-item">
+                <h2>Follow us on: </h2>
+                <ul class="social-links">
+                    <li>
+                        <a href="#">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fab fa-pinterest"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fab fa-google-plus"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="footer-item">
+                <h2>Popular Places:</h2>
+                <ul>
+                    <li><a href="https://www.tourismthailand.org/" target="_blank">Thailand</a></li>
+                    <li><a href="https://www.australia.com/en" target="_blank">Australia</a></li>
+                    <li><a href="https://visitmaldives.com/" target="_blank">Maldives</a></li>
+                    <li><a href="https://www.myswitzerland.com/en-us/" target="_blank">Switzerland</a></li>
+                    <li><a href="https://www.germany.travel/en/../index.html" target="_blank">Germany</a></li>
+                    <li><a href="https://www.visitdubai.com/en" target="_blank">Dubai</a></li>
+                    <li><a href="https://www.indonesia.travel/gb/en/home" target="_blank">Indonesia</a></li>
+                    <li><a href="https://www.spain.info/en/" target="_blank">Spain</a></li>
+                    <li><a href="https://goturkiye.com/" target="_blank">Turkey</a></li>
+                    <li><a href="https://www.france.fr/en" target="_blank">France</a></li>
+                    <li><a href="https://www.japan.travel/en/" target="_blank">Japan</a></li>
+                    <li><a href="https://www.visitbritain.com/en" target="_blank">United Kingdom</a></li>
+                    <li><a href="https://www.visitgreece.gr/" target="_blank">Greece</a></li>
+                    <li><a href="https://www.italia.it/en" target="_blank">Italy</a></li>
+                </ul>
+            </div>
+
+            <div class="subscribe-form footer-item">
+                <h2>Subscribe for Newsletter!</h2>
+                <form class="flex">
+                    <input type="email" placeholder="Enter Email" class="form-control">
+                    <input type="submit" class="btn" value="Subscribe">
+                </form>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>
